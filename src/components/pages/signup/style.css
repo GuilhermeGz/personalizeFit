@@ -12,6 +12,9 @@
     text-align: center;
 }
 
+.main .logo h1 {
+    color: #457B9D;
+}
 
 .main label {
     padding: 15px;
@@ -24,8 +27,8 @@
     width: 100%;
     border: 1px solid #c2c8d0;
     position: relative;
-    background: transparent;
-    border-radius: 3px;
+    background: #FFF;
+    border-radius: 15px;
     line-height: 1.1;
     outline: none;
     font-size: 16px;
@@ -39,7 +42,7 @@
     text-align: center;
 }
 
-.btns button[type='submit'] { 
+.btns button[type='submit'] {
     font-family: latoregular;
     text-transform: uppercase;
     text-align: center;
@@ -50,7 +53,7 @@
     background: #1D3557;
     transition: all .1s ease-in-out;
     -moz-transition: all .1s ease-in-out;
-    border-radius: 3px;
+    border-radius: 15px;
     border: none;
     outline: none;
     font-size: 16px;
@@ -84,6 +87,8 @@
 .tipo-perfil {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+
 }
 
 .tipo-perfil .teste {
@@ -105,6 +110,14 @@
 .tipo-perfil label {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Ajuste conforme necessário */
+    margin-right: 20px;
+    /* Ajuste conforme necessário */
 }
 
+.titleCadastro {
+    margin-top: 25px;
+}
+
+.titleSignup {
+    margin-top: 10px;
+}

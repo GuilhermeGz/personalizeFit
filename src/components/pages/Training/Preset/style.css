@@ -1,0 +1,101 @@
+/* style.css */
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: -webkit-center;
+
+}
+
+.title {
+    margin-top: 3%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    font-size: 42px;
+}
+
+.underline {
+    width: 60vw;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 0 auto;
+}
+
+.text-input {
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+.text-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.text-input input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.square-box {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.inner-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Permite a quebra de linha quando necessário */
+
+}
+
+.cardContainer {
+    align-items: center;
+    background-color: white;
+    padding: 12px;
+    border-radius: 20px;
+    margin: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    width: calc(25% - 24px);
+    /* 25% para exibir 4 cartões lado a lado, subtraindo a margem */
+    flex-shrink: 0;
+    /* Evita que os cartões se reduzam quando há espaço insuficiente */
+    box-sizing: border-box;
+    /* Inclui a largura da borda e do preenchimento no cálculo total da largura */
+}
+
+.bntAccountContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon {
+    font-size: 35px;
+    color: #1D3557;
+}
+
+.cardText {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1D3557;
+}

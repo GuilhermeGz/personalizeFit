@@ -73,13 +73,13 @@ body {
     -moz-transition: all .2s ease-in-out;
 }
 
-.btns {
+.btnss {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.btns button[type='submit'] {
+.btnss button[type='submit'] {
     font-family: latoregular;
     text-transform: uppercase;
     text-align: center;
@@ -87,7 +87,7 @@ body {
     width: calc(18rem + 33px);
     margin-top: 1.5rem;
     color: #FFF;
-    background: #1D3557;
+    background: #E63946;
     transition: all .1s ease-in-out;
     -moz-transition: all .1s ease-in-out;
     border-radius: 15px;
@@ -106,7 +106,7 @@ body {
 }
 
 
-.btns button {
+.btnss button {
     outline: none;
     width: calc(18rem + 33px);
     height: 52px;

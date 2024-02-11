@@ -1,5 +1,7 @@
 import React from 'react';
 import "./style.css";
+import Logo from '../../../img/Anderson.png'
+
 
 const Signup = () => {
     
@@ -9,7 +11,12 @@ const Signup = () => {
     }
     return (
     <div className='main'>
-        <h1>CADASTRAR-SE</h1>
+              <div className='logo'>
+                    <img src={Logo} alt="Imagem de um gostoso na academia" />
+                    <h1>PERSONALIZE FIT</h1>
+
+                </div>
+            <h3 className='titleSignup'>Criar Conta</h3>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="">
                     <p>Nome:</p>
@@ -27,7 +34,11 @@ const Signup = () => {
                     <p>Confirmar senha:</p>
                     <input type="password" className='dados-cadastro' />
                 </label>
+
+                <p className='titleCadastro'>Tipo de Cadastro</p>
+
                 <div className='tipo-perfil'>
+                
                     <label htmlFor="">
                         <input type="radio" name="tipo_cadastro" id="personal" className='teste' />
                         <p>Personal</p>
@@ -39,7 +50,7 @@ const Signup = () => {
                 </div>
 
                 <div className='btns'>
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Criar Conta</button>
                 </div>
             </form>
     </div>

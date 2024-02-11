@@ -1,13 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('teste')
+        navigate('/Training/Preset');
     }
 
   return (
@@ -21,11 +24,11 @@ const Login = () => {
                 </div>
                 <label htmlFor="">
                     <p>E-mail / Telefone:</p>
-                    <input type="text" />
+                    <input type="text" className='inputLogin'/>
                 </label>
                 <label htmlFor="">
                     <p>Senha:</p>
-                    <input type="password" />
+                    <input type="password" className='inputLogin'/>
                 </label>
                 <br />
                 <div className='btns'>
