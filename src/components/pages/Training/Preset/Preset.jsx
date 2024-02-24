@@ -1,6 +1,7 @@
 import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; 
 
 const Preset = () => {
     const [trainingPresetList, setTrainingPresetList] = useState([]);
@@ -16,7 +17,6 @@ const Preset = () => {
         fetchTrainingPresetList();
     }, []);
 
-    // Filtrar os itens com base no valor de pesquisa
     const filteredPresetList = trainingPresetList.filter(preset =>
         preset.title.toLowerCase().includes(searchValue.toLowerCase())
     );
@@ -42,10 +42,12 @@ const Preset = () => {
 
                 <div className="content">
                     <div className="cardContainer">
-                        <div className="bntAccountContainer">
-                            <FaPlus className='icon' />
-                            <p className="cardText">Adicionar</p>
-                        </div>
+                        <Link to='/Training/Create'> 
+                            <div className="bntAccountContainer">
+                                <FaPlus className='icon' />
+                                <p className="cardText">Adicionar</p>
+                            </div>
+                        </Link>
                     </div>
 
                     {filteredPresetList.map((preset, index) => (
