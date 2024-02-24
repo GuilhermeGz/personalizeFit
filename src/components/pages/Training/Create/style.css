@@ -96,3 +96,8 @@
     font-weight: bold;
     color: #1D3557;
 }
+
+.cancelarButton {
+    background: #E63946 !important;
+    margin-right: 50px !important;
+}
