@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
+import { useLocation } from "react-router-dom";
 
 const Create = () => {
     const [series, setSeries] = useState([]);
     const [observation, setObservation] = useState('');
+    const [exerciseName, setExerciseName] = useState('');
+    const location = useLocation();
+    const exerciseId = location.state && location.state.exerciseId;
 
     const handleAddSerie = () => {
         const newSeries = series.concat({
@@ -65,6 +69,22 @@ const Create = () => {
             });
     };
 
+    useEffect(() => {
+        const fetchExerciseName = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/exercise/api/Exercise/${exerciseId}`);
+                const data = await response.json();
+                setExerciseName(data.name);
+            } catch (error) {
+                console.error('Erro ao buscar o nome do exercício:', error);
+            }
+        };
+
+        if (exerciseId) {
+            fetchExerciseName();
+        }
+    }, [exerciseId]);
+
     return (
         <div className='main'>
             <div className='title'>
@@ -75,7 +95,7 @@ const Create = () => {
                 <div className="cardContainer">
                     <div className="bntAccountContainer">
                         <FaDumbbell className='icon' />
-                        <p className="cardText">Exercício 1</p>
+                        <p className="cardText">{exerciseName}</p>
                     </div>
                 </div>
                 <div className='text-input'>
@@ -121,7 +141,7 @@ const Create = () => {
                                 />
                                 <FaTrash
                                     className="trash"
-                                    size={20}
+                                    size={60}
                                     color="red"
                                     onClick={() => handleRemoveSerie(index)}
                                 />

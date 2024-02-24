@@ -8,7 +8,7 @@ const List = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const fetchExerciseList = async () => {
             const response = await fetch('http://localhost:8000/exercise/api/Exercise');
@@ -23,8 +23,8 @@ const List = () => {
         exercise.name.toLowerCase().includes(searchValue.toLowerCase())
     );
     
-    const handleConcluirClick = () => {
-        navigate(`/Serie/Create`);
+    const handleConcluirClick = (exerciseId) => {
+        navigate(`/Serie/Create`, { state: { exerciseId } });
     };
 
     const handleConcluirClick1 = () => {
@@ -51,7 +51,7 @@ const List = () => {
                 
                 <div className="content">
                     {filteredExerciseList.map((exercise, index) => (
-                        <div className="cardContainer" key={index} onClick={handleConcluirClick}>
+                        <div className="cardContainer" key={index} onClick={() => handleConcluirClick(exercise.id)}>
                             <div className="bntAccountContainer">
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{exercise.name}</p>
