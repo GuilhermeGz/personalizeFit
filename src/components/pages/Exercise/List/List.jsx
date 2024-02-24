@@ -4,6 +4,7 @@ import "./style.css";
 
 const List = () => {
     const [exerciseList, setExerciseList] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
         const fetchExerciseList = async () => {
@@ -15,6 +16,10 @@ const List = () => {
         fetchExerciseList();
     }, []); 
 
+    const filteredExerciseList = exerciseList.filter(exercise =>
+        exercise.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
     return (
         <div className='main'>
             <div>
@@ -24,12 +29,17 @@ const List = () => {
                 </div>
                 <div className='text-input'>
                     <label htmlFor="">
-                        <input type="text" placeholder='Exercício ou Grupo Muscular' />
+                        <input
+                            type="text"
+                            placeholder='Exercício ou Grupo Muscular'
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
                     </label>
                 </div>
                 
                 <div className="content">
-                    {exerciseList.map((exercise, index) => (
+                    {filteredExerciseList.map((exercise, index) => (
                         <div className="cardContainer" key={index}>
                             <div className="bntAccountContainer">
                                 <FaDumbbell className='icon' />
