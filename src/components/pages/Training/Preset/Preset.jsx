@@ -1,11 +1,10 @@
 import "./style.css";
-import { FaDumbbell, FaTrash, FaPlus   } from 'react-icons/fa';
+import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import React, { useState, useEffect } from 'react';
 
-
 const Preset = () => {
-
     const [trainingPresetList, setTrainingPresetList] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
         const fetchTrainingPresetList = async () => {
@@ -15,7 +14,12 @@ const Preset = () => {
         };
 
         fetchTrainingPresetList();
-    }, []); 
+    }, []);
+
+    // Filtrar os itens com base no valor de pesquisa
+    const filteredPresetList = trainingPresetList.filter(preset =>
+        preset.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
     return (
         <div className='main'>
@@ -26,21 +30,25 @@ const Preset = () => {
                 </div>
                 <div className='text-input'>
                     <label htmlFor="">
-                        <input type="text" placeholder='Predefinição de Treino'/>
+                        <input
+                            type="text"
+                            placeholder='Pesquisar Predefinição de Treino'
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
                     </label>
                 </div>
                 <h1>Predefinições</h1>
 
                 <div className="content">
-
                     <div className="cardContainer">
                         <div className="bntAccountContainer">
-                            <i className="icon">+</i>
-                            <p className="cardText">Adiconar</p>
+                            <FaPlus className='icon' />
+                            <p className="cardText">Adicionar</p>
                         </div>
                     </div>
 
-                    {trainingPresetList.map((preset, index) => (
+                    {filteredPresetList.map((preset, index) => (
                         <div className="cardContainer" key={index}>
                             <div className="bntAccountContainer">
                                 <FaDumbbell className='icon' />
@@ -48,7 +56,6 @@ const Preset = () => {
                             </div>
                         </div>
                     ))}
-                  
                 </div>
             </div>
         </div>
