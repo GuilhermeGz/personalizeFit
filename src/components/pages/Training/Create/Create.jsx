@@ -6,9 +6,13 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
 
     const navigate = useNavigate();
-    
+
     const handleConcluirClick = () => {
         navigate(`/Training/Preset`);
+    };
+
+    const handleConcluirClick1 = () => {
+        navigate(`/Exercise/List`);
     };
 
     return (
@@ -27,7 +31,7 @@ const Create = () => {
 
                 <div className="content">
 
-                    <div className="cardContainer">
+                    <div className="cardContainer"  onClick={handleConcluirClick1}>
                         <div className="bntAccountContainer">
                             <FaPlus className='icon' />
                             <p className="cardText">Adicionar Exercício</p>
