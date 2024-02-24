@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+
 
 const List = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchExerciseList = async () => {
@@ -19,6 +22,14 @@ const List = () => {
     const filteredExerciseList = exerciseList.filter(exercise =>
         exercise.name.toLowerCase().includes(searchValue.toLowerCase())
     );
+    
+    const handleConcluirClick = () => {
+        navigate(`/Serie/Create`);
+    };
+
+    const handleConcluirClick1 = () => {
+        navigate(`/Training/Create`);
+    };
 
     return (
         <div className='main'>
@@ -40,7 +51,7 @@ const List = () => {
                 
                 <div className="content">
                     {filteredExerciseList.map((exercise, index) => (
-                        <div className="cardContainer" key={index}>
+                        <div className="cardContainer" key={index} onClick={handleConcluirClick}>
                             <div className="bntAccountContainer">
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{exercise.name}</p>
@@ -48,6 +59,13 @@ const List = () => {
                         </div>
                     ))}
                 </div>
+
+                <div className='serie_btns'>
+                    <button type='submit' className="concluirButton cancelarButton1" onClick={handleConcluirClick1}>
+                        Cancelar
+                    </button>
+                </div>
+
             </div>
         </div>
     );
