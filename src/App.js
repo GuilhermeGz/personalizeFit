@@ -14,11 +14,14 @@ import CreateExercise from './components/pages/Exercise/Create/Create';
 import UpdateTraining from './components/pages/Training/Update/Update';
 import GroupListTraining from './components/pages/Training/Group/List/List';
 import UpdateSerie from './components/pages/Series/Update/Update';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Navbar />
+
         <Routes>
           <Route exact path='/' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
