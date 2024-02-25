@@ -111,6 +111,9 @@ const Update = () => {
             trainingGroupHasExercises: updatedExercises
         }));
 
+        setExercises(updatedExercises);
+
+
         console.log(trainingAux);
     }
 
