@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
 const List = () => {
     const [exerciseList, setExerciseList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const trainingAux = location.state && location.state.trainingAux;
+
     
     useEffect(() => {
+        console.log(trainingAux);
         const fetchExerciseList = async () => {
             const response = await fetch('http://localhost:8000/exercise/api/Exercise');
             const data = await response.json();
@@ -24,7 +29,7 @@ const List = () => {
     );
     
     const handleConcluirClick = (exerciseId) => {
-        navigate(`/Serie/Create`, { state: { exerciseId } });
+        navigate(`/Serie/Create`, { state: { exerciseId, trainingAux } });
     };
 
     const handleConcluirClick1 = () => {

@@ -1,19 +1,89 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./style.css";
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Create = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const [inputName, setInputName] = useState(""); 
+
+
+    const [trainingAux, setTrainingAux] = useState({
+        name: "TrainingAux",
+        trainingPresetId: 1,
+        trainingGroupHasExercises: []
+    });
 
     const handleConcluirClick = () => {
         navigate(`/Training/Preset`);
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Exercise/List`);
+        navigate(`/Exercise/List`, { state: { trainingAux } });
     };
+
+const handleConcluirClick2 = () => {
+    if (inputName != ""){
+        setTrainingAux(prevState => ({
+            ...prevState,
+            name: inputName
+        }));
+    }
+    
+};
+
+useEffect(() => {
+    if (trainingAux.name != "TrainingAux") {
+        console.log("entrou");
+        console.log(trainingAux);
+
+        fetch('http://localhost:8000/training/api/TrainingGroup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(trainingAux)
+        })
+        .then(response => {
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            console.log('Resposta da solicitação POST:', data);
+        })
+        .catch(error => {
+            console.error('Erro na solicitação POST:', error);
+        });
+
+        navigate(`/Training/Preset`);
+    }
+}, [trainingAux]);
+
+
+
+
+
+    useEffect(() => {
+        const initializeTrainingAux = () => {
+            if (location.state && location.state.trainingAux1) {
+                console.log("trainingAux1 encontrado na localização:");
+                console.log(location.state.trainingAux1);
+                setTrainingAux(location.state.trainingAux1);
+            } else {
+                console.log("Criando um novo trainingAux padrão...");
+            }
+        };
+    
+        initializeTrainingAux();    
+        console.log(trainingAux);
+    }, [location.state]);
 
     return (
         <div className='main'>
@@ -24,7 +94,12 @@ const Create = () => {
                 </div>
                 <div className='text-input'>
                     <label htmlFor="">
-                        <input type="text" placeholder='Título da Predefinição'/>
+                        <input
+                            type="text"
+                            placeholder='Título da Predefinição'
+                            value={inputName}
+                            onChange={(e) => setInputName(e.target.value)} 
+                        />                    
                     </label>
                 </div>
                 <h1>Exercícios</h1>
@@ -46,7 +121,7 @@ const Create = () => {
                         Cancelar
                     </button>
 
-                    <button type='submit' className="concluirButton" >
+                    <button type='submit' className="concluirButton" onClick={handleConcluirClick2}>
                         Concluir
                     </button>
                 </div>

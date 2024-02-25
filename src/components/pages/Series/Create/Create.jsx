@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
     const [series, setSeries] = useState([]);
     const [observation, setObservation] = useState('');
     const [exerciseName, setExerciseName] = useState('');
     const location = useLocation();
+    const navigate = useNavigate();
     const exerciseId = location.state && location.state.exerciseId;
+    const [trainingAux, setTrainingAux] = useState(location.state && location.state.trainingAux);
+    const [requestProcessed, setRequestProcessed] = useState(false);
+
 
     const handleAddSerie = () => {
         const newSeries = series.concat({
@@ -31,45 +36,39 @@ const Create = () => {
         setSeries(newSeries);
     };
 
-    const handleRequest = () => {
-        const trainingSetJsonString = JSON.stringify(series);
-        const serieData = {
-            name: "teste Serie",
-            trainingPresetId: "1",
-            trainingGroupHasExercises: [
-                {
-                    exerciseId: 1,
-                    observation: observation,
-                    trainingSetJsonString: trainingSetJsonString
-                }
-            ]
-        };
 
-        console.log(serieData);
-        fetch('http://localhost:8000/training/api/TrainingGroup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(serieData)
-        })
-            .then(response => {
-                const contentType = response.headers.get('content-type');
-                if (contentType && contentType.includes('application/json')) {
-                    return response.json();
-                } else {
-                    return response.text();
-                }
-            })
-            .then(data => {
-                console.log('Resposta da solicitação POST:', data);
-            })
-            .catch(error => {
-                console.error('Erro na solicitação POST:', error);
-            });
+    const handleRequest = async () => {
+        const trainingSetJsonString = JSON.stringify(series);
+        const newTrainingGroupHasExercises = [
+            ...trainingAux.trainingGroupHasExercises,
+            {
+                exerciseId: exerciseId,
+                observation: observation,
+                trainingSetJsonString: trainingSetJsonString
+            }
+        ];
+    
+        setTrainingAux({
+            ...trainingAux,
+            trainingGroupHasExercises: newTrainingGroupHasExercises
+        });
+    
+        setRequestProcessed(true);
     };
+    
+    useEffect(() => {
+        if (requestProcessed) {
+            console.log("Novo trainingAux:", trainingAux);
+            navigate(`/Training/Create`, { state: { trainingAux1: trainingAux } });
+        }
+    }, [requestProcessed]);
+
+
+    
 
     useEffect(() => {
+        console.log(exerciseId);
+        console.log(trainingAux);
         const fetchExerciseName = async () => {
             try {
                 const response = await fetch(`http://localhost:8000/exercise/api/Exercise/${exerciseId}`);
