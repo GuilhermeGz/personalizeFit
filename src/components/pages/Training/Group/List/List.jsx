@@ -1,9 +1,8 @@
 import "./style.css";
-import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaDumbbell, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
 
 const List = () => {
     const [trainingPresetList, setTrainingPresetList] = useState([]);
@@ -42,8 +41,29 @@ const List = () => {
     };
 
     const handleConcluirClick1 = () => {
-        // navigate(`/Exercise/List`, { state: { trainingAux } });
+        navigate(`/Training/Preset`);
     };
+
+    const handleButtonClickDelete = async (preset) => {
+        try {
+            const response = await fetch(`http://localhost:8000/training/api/TrainingGroup/${preset.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                console.log("Preset deleted successfully:", preset);
+                // Atualize a lista de predefinições após a exclusão
+                setTrainingPresetList(prevList => prevList.filter(item => item.id !== preset.id));
+            } else {
+                console.error("Failed to delete preset:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error deleting preset:", error);
+        }
+    }
 
     return (
         <div className='main'>
@@ -75,6 +95,7 @@ const List = () => {
                     {filteredPresetList.map((preset, index) => (
                         <div className="cardContainer" key={index} onClick={() => handleButtonClick2(preset)}>
                             <div className="bntAccountContainer">
+                                <FaTimes className='trashCard' onClick={(e) => { e.stopPropagation(); handleButtonClickDelete(preset); }} />
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{preset.name}</p>
                             </div>

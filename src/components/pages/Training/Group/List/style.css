@@ -101,3 +101,9 @@
     background: #E63946 !important;
     margin-right: 50px !important;
 }
+
+.trashCard {
+    color: red;
+    size: 20px;
+    margin-left: auto;
+}
