@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./style.css";
-import { FaPlus, FaDumbbell } from 'react-icons/fa';
+import { FaPlus, FaDumbbell, FaTimes } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -104,6 +104,16 @@ const Update = () => {
         }
     }, [trainingAux]);
 
+    const handleButtonClickDelete = (exercise) => {
+        const updatedExercises = trainingAux.trainingGroupHasExercises.filter(item => item.exerciseId !== exercise.exerciseId);
+        setTrainingAux(prevState => ({
+            ...prevState,
+            trainingGroupHasExercises: updatedExercises
+        }));
+
+        console.log(trainingAux);
+    }
+
     return (
         <div className='main'>
             <div>
@@ -135,6 +145,7 @@ const Update = () => {
                     {exercises.map((exercise, index) => (
                         <div className="cardContainer" key={index}  onClick={()=> handleConcluirClick3(exercise)}>
                             <div className="bntAccountContainer">
+                                <FaTimes className='trashCard' onClick={(e) => { e.stopPropagation(); handleButtonClickDelete(exercise); }} />
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{exercise.name}</p>
                             </div>
