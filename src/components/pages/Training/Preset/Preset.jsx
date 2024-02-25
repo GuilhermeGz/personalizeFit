@@ -1,11 +1,12 @@
 import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { useNavigate } from "react-router-dom";
 
 const Preset = () => {
     const [trainingPresetList, setTrainingPresetList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTrainingPresetList = async () => {
@@ -20,6 +21,10 @@ const Preset = () => {
     const filteredPresetList = trainingPresetList.filter(preset =>
         preset.title.toLowerCase().includes(searchValue.toLowerCase())
     );
+
+    const handleButtonClick = () => {
+        navigate(`/Training/Create`);
+    }
 
     return (
         <div className='main'>
@@ -41,13 +46,11 @@ const Preset = () => {
                 <h1>Predefinições</h1>
 
                 <div className="content">
-                    <div className="cardContainer">
-                        <Link to='/Training/Create'> 
-                            <div className="bntAccountContainer">
-                                <FaPlus className='icon' />
-                                <p className="cardText">Adicionar</p>
-                            </div>
-                        </Link>
+                    <div className="cardContainer" onClick={handleButtonClick}>
+                        <div className="bntAccountContainer">
+                            <FaPlus className='icon' />
+                            <p className="cardText">Adicionar</p>
+                        </div>
                     </div>
 
                     {filteredPresetList.map((preset, index) => (
