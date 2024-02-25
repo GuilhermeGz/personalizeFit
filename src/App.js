@@ -11,7 +11,9 @@ import CreateTraining from './components/pages/Training/Create/Create';
 import ListExercise from './components/pages/Exercise/List/List';
 import CreateSerie from './components/pages/Series/Create/Create';
 import CreateExercise from './components/pages/Exercise/Create/Create';
-
+import UpdateTraining from './components/pages/Training/Update/Update';
+import GroupListTraining from './components/pages/Training/Group/List/List';
+import UpdateSerie from './components/pages/Series/Update/Update';
 
 function App() {
   return (
@@ -32,10 +34,21 @@ function App() {
           <Route path='/Exercise/List' element={<ListExercise />} />
 
           {/* ok */}
+          <Route path='/Exercise/Create' element={<CreateExercise />} />
+          
+          {/* ok */}
           <Route path='/Serie/Create' element={<CreateSerie />} />
 
-          {/* ok */}
-          <Route path='/Exercise/Create' element={<CreateExercise />} />
+
+
+          <Route path='/Training/Update' element={<UpdateTraining />} />
+
+          <Route path='/Training/Group/List' element={<GroupListTraining />} />
+
+          <Route path='/Serie/Update' element={<UpdateSerie />} />
+
+
+
 
         </Routes>
       </BrowserRouter>
