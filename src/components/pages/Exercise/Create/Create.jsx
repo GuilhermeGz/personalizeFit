@@ -38,6 +38,12 @@ const Create = () => {
         fetchSimilarExercises();
     }, []);
 
+    const clearFields = () => {
+        setExerciseName('');
+        setSelectedMuscleGroup('');
+        setSelectedSimilarExercises([]);
+    };
+
     const handleRequest = () => {
         const exerciseData = {
             name: exerciseName,
@@ -65,12 +71,15 @@ const Create = () => {
             }
         })
         .then(data => {
+            clearFields();
+
             console.log('Resposta da solicitação POST:', data);
         })
         .catch(error => {
             console.error('Erro na solicitação POST:', error);
         });
     };
+    
 
     return (
         <div className='main'>
