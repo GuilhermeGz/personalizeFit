@@ -1,4 +1,3 @@
-// Aqui você pode enviar o novo trainingAux para o backend
 import React, { useEffect, useState } from 'react';
 import "./style.css";
 import { FaPlus, FaDumbbell } from 'react-icons/fa';
@@ -6,13 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Update = () => {
-
     const navigate = useNavigate();
     const location = useLocation();
-    const [inputName, setInputName] = useState(""); 
+    const [inputName, setInputName] = useState(location.state.trainingGroup.name); 
     const [exercises, setExercises] = useState([]);
-
     const [trainingAux, setTrainingAux] = useState(location.state.trainingGroup);
+    const [exerciseUp, setExerciseUp] = useState(location.state && location.state.exerciseAux);
 
     const getExerciseNameById = async (exerciseId) => {
         try {
@@ -34,17 +32,63 @@ const Update = () => {
     };
 
     const handleConcluirClick2 = () => {
-        if (inputName.trim() !== "") {
-            setTrainingAux(prevState => ({
-                ...prevState,
-                name: inputName
-            }));
+        const resp = {
+            name: inputName,
+            trainingPresetId: trainingAux.trainingPreset.id,
+            trainingGroupHasExercises: trainingAux.trainingGroupHasExercises
         }
+
+        console.log(trainingAux);
+        console.log(trainingAux.trainingGroupHasExercises);
+        console.log(resp);
+        console.log("Deveria atualizar");
+
+        fetch(`http://localhost:8000/training/api/TrainingGroup/${trainingAux.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(resp)
+            })
+            .then(response => {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json();
+                } else {
+                    return response.text();
+                }
+            })
+            .then(data => {
+                console.log('Resposta da solicitação POST:', data);
+            })
+            .catch(error => {
+                console.error('Erro na solicitação POST:', error);
+            });
+
+        navigate(`/Training/Preset`)
     };
 
     const handleConcluirClick3 = (exercise) => {
-        navigate(`/Serie/Update`, { state: { exercise } });
+        navigate(`/Serie/Update`, { state: { exercise, trainingAux } });
     };
+
+    useEffect(() => {
+        console.log("Aquiiii");
+        console.log(exerciseUp);
+        console.log(trainingAux);
+        if (trainingAux.trainingGroupHasExercises.length > 0 && exerciseUp) {
+            const updatedExercises = trainingAux.trainingGroupHasExercises.map(item => {
+                if (item.exerciseId === exerciseUp.exerciseId) {
+                    return exerciseUp;
+                }
+                return item;
+            });
+            setTrainingAux(prevState => ({
+                ...prevState,
+                trainingGroupHasExercises: updatedExercises
+            }));
+        }
+    }, [exerciseUp]);
 
     useEffect(() => {
         if (trainingAux.trainingGroupHasExercises.length > 0) {

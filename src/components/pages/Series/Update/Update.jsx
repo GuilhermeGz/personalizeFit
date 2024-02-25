@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Update = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const exerciseId = location.state && location.state.exerciseId;
-    const [trainingAux, setTrainingAux] = useState(location.state && location.state.trainingAux);
+    const exerciseId = location.state && location.state.exercise.exerciseId;
     const [requestProcessed, setRequestProcessed] = useState(false);
     const [exerciseAux, setExerciseAux] = useState(location.state && location.state.exercise);
     const [observation, setObservation] = useState(exerciseAux.observation);
@@ -42,27 +41,24 @@ const Update = () => {
 
     const handleRequest = async () => {
         const trainingSetJsonString = JSON.stringify(series);
-        const newTrainingGroupHasExercises = [
-            ...trainingAux.trainingGroupHasExercises,
+        const newTrainingGroupHasExercises = 
             {
-                exerciseId: exerciseId,
+                exerciseId: exerciseAux.exerciseId,
                 observation: observation,
+                name: exerciseAux.name,
                 trainingSetJsonString: trainingSetJsonString
             }
-        ];
-    
-        setTrainingAux({
-            ...trainingAux,
-            trainingGroupHasExercises: newTrainingGroupHasExercises
-        });
-    
+        ;
+ 
+        setExerciseAux(newTrainingGroupHasExercises);
         setRequestProcessed(true);
     };
     
     useEffect(() => {
         if (requestProcessed) {
-            console.log("Novo trainingAux:", trainingAux);
-            navigate(`/Training/Create`, { state: { trainingAux1: trainingAux } });
+            console.log("Novo trainingAux:", exerciseAux);
+            console.log(location.state.trainingAux);
+            navigate(`/Training/Update`, { state: { exerciseAux: exerciseAux, trainingGroup: location.state.trainingAux } });
         }
     }, [requestProcessed]);
 
@@ -73,7 +69,6 @@ const Update = () => {
         const trainingSet = JSON.parse(exerciseAux.trainingSetJsonString);
         setSeries(trainingSet); 
         console.log(exerciseAux);
-        console.log(trainingSet); 
     }, []);
 
     return (
