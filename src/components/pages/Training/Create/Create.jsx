@@ -1,7 +1,6 @@
-// Aqui você pode enviar o novo trainingAux para o backend
 import React, { useEffect, useState } from 'react';
 import "./style.css";
-import { FaPlus, FaDumbbell } from 'react-icons/fa';
+import { FaPlus, FaDumbbell, FaTimes } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -107,6 +106,22 @@ const Create = () => {
         }
     }, [trainingAux]);
 
+    
+    const handleButtonClickDelete = (exercise) => {
+        const updatedExercises = trainingAux.trainingGroupHasExercises.filter(item => item.exerciseId !== exercise.exerciseId);
+        setTrainingAux(prevState => ({
+            ...prevState,
+            trainingGroupHasExercises: updatedExercises
+        }));
+
+        setExercises(updatedExercises);
+
+        console.log("Deletar");
+        console.log(trainingAux);
+        console.log(exercises);
+    }
+    
+    
     return (
         <div className='main'>
             <div>
@@ -138,6 +153,7 @@ const Create = () => {
                     {exercises.map((exercise, index) => (
                         <div className="cardContainer" key={index}>
                             <div className="bntAccountContainer">
+                                <FaTimes className='trashCard' onClick={(e) => { e.stopPropagation(); handleButtonClickDelete(exercise); }} />
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{exercise.name}</p>
                             </div>
