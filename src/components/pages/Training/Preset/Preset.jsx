@@ -29,8 +29,8 @@ const Preset = () => {
         navigate(`/Training/Create`);
     }
 
-    const handleButtonClick2 = (trainingPresetId) => {
-        navigate(`/Training/Group/List`, { state: { trainingPresetId: trainingPresetId } });
+    const handleButtonClick2 = (trainingPreset) => {
+        navigate(`/Training/Group/List`, { state: { trainingPreset: trainingPreset } });
     }
 
     return (
@@ -61,7 +61,7 @@ const Preset = () => {
                     </div>
 
                     {filteredPresetList.map((preset, index) => (
-                        <div className="cardContainer" key={index} onClick={() => {handleButtonClick2(preset.id)}}>
+                        <div className="cardContainer" key={index} onClick={() => {handleButtonClick2(preset)}}>
                             <div className="bntAccountContainer">
                                 <FaDumbbell className='icon' />
                                 <p className="cardText">{preset.title}</p>

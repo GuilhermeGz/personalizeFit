@@ -11,10 +11,11 @@ const Create = () => {
     const location = useLocation();
     const [inputName, setInputName] = useState(""); 
     const [exercises, setExercises] = useState([]);
+    const [update, setUpdate] = useState(location.state.update);
 
     const [trainingAux, setTrainingAux] = useState({
         name: "TrainingAux",
-        trainingPresetId: 1,
+        trainingPresetId: update ? location.state.update : 1,
         trainingGroupHasExercises: []
     });
 

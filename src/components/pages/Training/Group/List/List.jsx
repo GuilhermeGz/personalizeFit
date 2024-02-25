@@ -12,6 +12,7 @@ const List = () => {
     const location = useLocation();
 
     useEffect(() => {
+        console.log(location.state.trainingPreset);
         const fetchTrainingPresetList = async () => {
             const response = await fetch('http://localhost:8000/training/api/TrainingGroup');
             const data = await response.json();
@@ -22,12 +23,12 @@ const List = () => {
     }, []);
 
     const filteredPresetList = trainingPresetList.filter(preset =>
-        preset.trainingPreset.id === location.state.trainingPresetId &&
+        preset.trainingPreset.id === location.state.trainingPreset.id &&
         preset.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
     const handleButtonClick = () => {
-        // navigate(`/Training/Create`);
+        navigate(`/Training/Create`, {state: {update: location.state.trainingPreset.id} });
     }
 
     const handleButtonClick2 = (trainingGroup) => {
