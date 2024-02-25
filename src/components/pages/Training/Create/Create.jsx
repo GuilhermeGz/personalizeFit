@@ -11,7 +11,7 @@ const Create = () => {
     const location = useLocation();
     const [inputName, setInputName] = useState(""); 
     const [exercises, setExercises] = useState([]);
-    const [update, setUpdate] = useState(location.state.update);
+    const [update, setUpdate] = useState(location.state && location.state.update);
 
     const [trainingAux, setTrainingAux] = useState({
         name: "TrainingAux",
