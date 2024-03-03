@@ -10,7 +10,7 @@ const Create = () => {
   const [inputName, setInputName] = useState("");
 
   const cancelButtonClick = () => {
-    navigate(`Training/Preset`);
+    navigate(`/Training/Preset`);
   };
 
   return (
