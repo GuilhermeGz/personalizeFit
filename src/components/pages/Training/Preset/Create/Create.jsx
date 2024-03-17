@@ -13,6 +13,43 @@ const Create = () => {
     navigate(`/Training/Preset`);
   };
 
+  const submitButtonCliclk = () => {
+    if (inputName.trim() === "") {
+      alert("Por favor, insira um título para a predefinição de treino.");
+      return;
+    }
+    const aux = {
+      title: inputName,
+      presetDefaultFlag: true,
+      trainerId: "1",
+    };
+
+    console.log(aux);
+    fetch(`http://localhost:8000/training/api/TrainingPreset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(aux),
+    })
+      .then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          return response.json();
+        } else {
+          return response.text();
+        }
+      })
+      .then((data) => {
+        console.log("Resposta da solicitação POST:", data);
+      })
+      .catch((error) => {
+        console.error("Erro na solicitação POST:", error);
+      });
+
+    navigate(`/Training/Preset`);
+  };
+
   return (
     <div className="main">
       <div>
@@ -30,32 +67,6 @@ const Create = () => {
             />
           </label>
         </div>
-        <h1>Grupos de Treino</h1>
-
-        <div className="content">
-          <div className="cardContainer">
-            <div className="bntAccountContainer">
-              <FaPlus className="icon" />
-              <p className="cardText">Adicionar Treino</p>
-            </div>
-          </div>
-
-          {/* {exercises.map((exercise, index) => (
-            <div className="cardContainer" key={index}>
-              <div className="bntAccountContainer">
-                <FaTimes
-                  className="trashCard"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleButtonClickDelete(exercise);
-                  }}
-                />
-                <FaDumbbell className="icon" />
-                <p className="cardText">{exercise.name}</p>
-              </div>
-            </div>
-          ))} */}
-        </div>
 
         <div className="serie_btns">
           <button
@@ -69,7 +80,7 @@ const Create = () => {
           <button
             type="submit"
             className="concluirButton"
-            // onClick={handleConcluirClick2}
+            onClick={submitButtonCliclk}
           >
             Concluir
           </button>
