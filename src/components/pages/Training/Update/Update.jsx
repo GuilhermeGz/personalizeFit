@@ -28,80 +28,88 @@ const Update = () => {
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Exercise/List`, { state: { trainingAux } });
+      navigate(`/Exercise/List`, { state: { trainingAux, tipo: "update" } });
     };
 
     const handleConcluirClick2 = () => {
-        const resp = {
-            name: inputName,
-            trainingPresetId: trainingAux.trainingPreset.id,
-            trainingGroupHasExercises: trainingAux.trainingGroupHasExercises
+      const resp = {
+        name: inputName,
+        trainingPresetId: trainingAux.trainingPreset.id,
+        trainingGroupHasExercises: trainingAux.trainingGroupHasExercises,
+      };
+
+      console.log(trainingAux);
+      console.log(trainingAux.trainingGroupHasExercises);
+      console.log(resp);
+      console.log("Deveria atualizar");
+
+      fetch(
+        `http://localhost:8000/training/api/TrainingGroup/${trainingAux.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(resp),
         }
+      )
+        .then((response) => {
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            return response.json();
+          } else {
+            return response.text();
+          }
+        })
+        .then((data) => {
+          console.log("Resposta da solicitação POST:", data);
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação POST:", error);
+        });
 
-        console.log(trainingAux);
-        console.log(trainingAux.trainingGroupHasExercises);
-        console.log(resp);
-        console.log("Deveria atualizar");
-
-        fetch(`http://localhost:8000/training/api/TrainingGroup/${trainingAux.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(resp)
-            })
-            .then(response => {
-                const contentType = response.headers.get('content-type');
-                if (contentType && contentType.includes('application/json')) {
-                    return response.json();
-                } else {
-                    return response.text();
-                }
-            })
-            .then(data => {
-                console.log('Resposta da solicitação POST:', data);
-            })
-            .catch(error => {
-                console.error('Erro na solicitação POST:', error);
-            });
-
-        navigate(`/Training/Preset`)
+      navigate(`/Training/Preset`);
     };
 
     const handleConcluirClick3 = (exercise) => {
-        navigate(`/Serie/Update`, { state: { exercise, trainingAux } });
+      navigate(`/Serie/Update`, { state: { exercise, trainingAux } });
     };
 
     useEffect(() => {
-        console.log("Aquiiii");
-        console.log(exerciseUp);
-        console.log(trainingAux);
-        if (trainingAux.trainingGroupHasExercises.length > 0 && exerciseUp) {
-            const updatedExercises = trainingAux.trainingGroupHasExercises.map(item => {
-                if (item.exerciseId === exerciseUp.exerciseId) {
-                    return exerciseUp;
-                }
-                return item;
-            });
-            setTrainingAux(prevState => ({
-                ...prevState,
-                trainingGroupHasExercises: updatedExercises
-            }));
-        }
+      console.log("erro aqui");
+
+      console.log("Aquiiii");
+      console.log(exerciseUp);
+      console.log(trainingAux);
+      if (trainingAux.trainingGroupHasExercises.length > 0 && exerciseUp) {
+        const updatedExercises = trainingAux.trainingGroupHasExercises.map(
+          (item) => {
+            if (item.exerciseId === exerciseUp.exerciseId) {
+              return exerciseUp;
+            }
+            return item;
+          }
+        );
+        setTrainingAux((prevState) => ({
+          ...prevState,
+          trainingGroupHasExercises: updatedExercises,
+        }));
+      }
     }, [exerciseUp]);
 
     useEffect(() => {
-        if (trainingAux.trainingGroupHasExercises.length > 0) {
-            const fetchExercises = async () => {
-                const updatedExercises = [];
-                for (const exercise of trainingAux.trainingGroupHasExercises) {
-                    const name = await getExerciseNameById(exercise.exerciseId);
-                    updatedExercises.push({ ...exercise, name });
-                }
-                setExercises(updatedExercises);
-            };
-            fetchExercises();
-        }
+      console.log("erro aqui");
+      if (trainingAux.trainingGroupHasExercises.length > 0) {
+        const fetchExercises = async () => {
+          const updatedExercises = [];
+          for (const exercise of trainingAux.trainingGroupHasExercises) {
+            const name = await getExerciseNameById(exercise.exerciseId);
+            updatedExercises.push({ ...exercise, name });
+          }
+          setExercises(updatedExercises);
+        };
+        fetchExercises();
+      }
     }, [trainingAux]);
 
     const handleButtonClickDelete = (exercise) => {

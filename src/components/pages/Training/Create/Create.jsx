@@ -34,7 +34,7 @@ const Create = () => {
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Exercise/List`, { state: { trainingAux } });
+        navigate(`/Exercise/List`, { state: { trainingAux, tipo: "create" } });
     };
 
     const handleConcluirClick2 = () => {

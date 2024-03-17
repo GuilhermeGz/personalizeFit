@@ -13,76 +13,92 @@ const Create = () => {
     const exerciseId = location.state && location.state.exerciseId;
     const [trainingAux, setTrainingAux] = useState(location.state && location.state.trainingAux);
     const [requestProcessed, setRequestProcessed] = useState(false);
-
+    const tipo = location.state && location.state.tipo;
 
     const handleAddSerie = () => {
-        const newSeries = series.concat({
-            repeticao: "",
-            carga: "",
-            descanso: ""
-        });
-        setSeries(newSeries);
+      const newSeries = series.concat({
+        repeticao: "",
+        carga: "",
+        descanso: "",
+      });
+      setSeries(newSeries);
     };
 
     const handleRemoveSerie = (index) => {
-        const newSeries = [...series];
-        newSeries.splice(index, 1);
-        setSeries(newSeries);
+      const newSeries = [...series];
+      newSeries.splice(index, 1);
+      setSeries(newSeries);
     };
 
     const handleInputChange = (index, field, value) => {
-        const newSeries = [...series];
-        newSeries[index][field] = value;
-        setSeries(newSeries);
+      const newSeries = [...series];
+      newSeries[index][field] = value;
+      setSeries(newSeries);
     };
-
 
     const handleRequest = async () => {
-        const trainingSetJsonString = JSON.stringify(series);
-        const newTrainingGroupHasExercises = [
-            ...trainingAux.trainingGroupHasExercises,
-            {
-                exerciseId: exerciseId,
-                observation: observation,
-                trainingSetJsonString: trainingSetJsonString
-            }
-        ];
-    
-        setTrainingAux({
-            ...trainingAux,
-            trainingGroupHasExercises: newTrainingGroupHasExercises
-        });
-    
-        setRequestProcessed(true);
+      const trainingSetJsonString = JSON.stringify(series);
+      const newTrainingGroupHasExercises = [
+        ...trainingAux.trainingGroupHasExercises,
+        {
+          exerciseId: exerciseId,
+          observation: observation,
+          trainingSetJsonString: trainingSetJsonString,
+        },
+      ];
+
+      setTrainingAux({
+        ...trainingAux,
+        trainingGroupHasExercises: newTrainingGroupHasExercises,
+      });
+
+      setRequestProcessed(true);
     };
-    
+
     useEffect(() => {
-        if (requestProcessed) {
-            console.log("Novo trainingAux:", trainingAux);
-            navigate(`/Training/Create`, { state: { trainingAux1: trainingAux } });
+      console.log(tipo);
+
+      console.log("Update 1");
+      if (requestProcessed) {
+        console.log("ta entrando aqui");
+        console.log("Novo trainingAux:", trainingAux);
+
+        if (tipo == "create") {
+          navigate(`/Training/Create`, {
+            state: { trainingAux1: trainingAux },
+          });
+        } else {
+          navigate(`/Training/Update`, {
+            state: { trainingGroup: trainingAux },
+          });
         }
+      }
     }, [requestProcessed]);
 
-
-    
-
     useEffect(() => {
-        console.log(exerciseId);
-        console.log(trainingAux);
-        const fetchExerciseName = async () => {
-            try {
-                const response = await fetch(`http://localhost:8000/exercise/api/Exercise/${exerciseId}`);
-                const data = await response.json();
-                setExerciseName(data.name);
-            } catch (error) {
-                console.error('Erro ao buscar o nome do exercício:', error);
-            }
-        };
+      console.log("Update 2");
+      console.log(exerciseId);
+      console.log(trainingAux);
+      const fetchExerciseName = async () => {
+        console.log("ta entrando aqui222");
 
-        if (exerciseId) {
-            fetchExerciseName();
+        try {
+          const response = await fetch(
+            `http://localhost:8000/exercise/api/Exercise/${exerciseId}`
+          );
+          const data = await response.json();
+          setExerciseName(data.name);
+        } catch (error) {
+          console.error("Erro ao buscar o nome do exercício:", error);
         }
+      };
+
+      if (exerciseId) {
+        fetchExerciseName();
+      }
     }, [exerciseId]);
+
+
 
     return (
         <div className='main'>

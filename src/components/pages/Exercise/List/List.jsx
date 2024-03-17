@@ -11,25 +11,29 @@ const List = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const trainingAux = location.state && location.state.trainingAux;
+    const tipo = location.state && location.state.tipo;
 
-    
     useEffect(() => {
-        console.log(trainingAux);
-        const fetchExerciseList = async () => {
-            const response = await fetch('http://localhost:8000/exercise/api/Exercise');
-            const data = await response.json();
-            setExerciseList(data);
-        };
+      console.log("Aquiii");
+      console.log(tipo);
+      console.log(trainingAux);
+      const fetchExerciseList = async () => {
+        const response = await fetch(
+          "http://localhost:8000/exercise/api/Exercise"
+        );
+        const data = await response.json();
+        setExerciseList(data);
+      };
 
-        fetchExerciseList();
-    }, []); 
+      fetchExerciseList();
+    }, []);
 
-    const filteredExerciseList = exerciseList.filter(exercise =>
-        exercise.name.toLowerCase().includes(searchValue.toLowerCase())
+    const filteredExerciseList = exerciseList.filter((exercise) =>
+      exercise.name.toLowerCase().includes(searchValue.toLowerCase())
     );
-    
+
     const handleConcluirClick = (exerciseId) => {
-        navigate(`/Serie/Create`, { state: { exerciseId, trainingAux } });
+      navigate(`/Serie/Create`, { state: { exerciseId, trainingAux, tipo } });
     };
 
     const handleConcluirClick1 = () => {
