@@ -14,9 +14,9 @@ import CreateExercise from './components/pages/Exercise/Create/Create';
 import UpdateTraining from './components/pages/Training/Update/Update';
 import GroupListTraining from './components/pages/Training/Group/List/List';
 import CreatePreset from "./components/pages/Training/Preset/Create/Create";
-
 import UpdateSerie from "./components/pages/Series/Update/Update";
 import Navbar from "./Navbar";
+import InfoAluno from "./components/pages/Aluno/info/Info"
 
 function App() {
   return (
@@ -48,6 +48,9 @@ function App() {
           <Route path="/Training/Group/List" element={<GroupListTraining />} />
 
           <Route path="/Training/Preset/Create" element={<CreatePreset />} />
+
+          <Route path="/Aluno/info" element={<InfoAluno />} />
+
         </Routes>
       </BrowserRouter>
     </div>
