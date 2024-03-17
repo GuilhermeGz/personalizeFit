@@ -17,6 +17,8 @@ import CreatePreset from "./components/pages/Training/Preset/Create/Create";
 import UpdateSerie from "./components/pages/Series/Update/Update";
 import Navbar from "./Navbar";
 import InfoAluno from "./components/pages/Aluno/info/Info"
+import CreateAluno from "./components/pages/Aluno/Create/Create"
+
 
 function App() {
   return (
@@ -50,6 +52,9 @@ function App() {
           <Route path="/Training/Preset/Create" element={<CreatePreset />} />
 
           <Route path="/Aluno/info" element={<InfoAluno />} />
+
+          <Route path="/Aluno/Create" element={<CreateAluno />} />
+
 
         </Routes>
       </BrowserRouter>
