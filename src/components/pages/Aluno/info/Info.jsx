@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.css'; 
-import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaDumbbell } from 'react-icons/fa';
 
 const Info = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ const Info = () => {
     dateOfBirth: '',
     phoneNumber: '',
   });
+  
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (event) => {
     setFormData({
@@ -16,10 +18,15 @@ const Info = () => {
       [event.target.name]: event.target.value,
     });
   };
+  
+  const handleCheckboxChange = (event) => { 
+    setIsChecked(event.target.checked);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault(); 
     console.log('Form submitted:', formData);
+    console.log('Checkbox checked:', isChecked); 
   };
 
   return (
@@ -82,6 +89,17 @@ const Info = () => {
             onChange={handleChange}
           />
         </div>
+
+        <div className="fieldContainer text-input checkbox-container">
+            <label for="checkboxInput" className="fieldInput">Aluno ativo:</label>
+            <input
+                type="checkbox"
+                id="checkboxInput"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+            />
+        </div>
+                
         <div className="serie_btns">
             <button type='submit' className="concluirButton">
                 <span>Salvar</span>

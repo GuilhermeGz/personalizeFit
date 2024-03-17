@@ -37,7 +37,7 @@
 
 .text-input label {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .text-input input {
@@ -197,3 +197,15 @@
 .formContainer{
     width: 35%;
 }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+  }
+  
