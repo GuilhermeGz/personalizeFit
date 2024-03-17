@@ -191,6 +191,7 @@
 } */
 
 .fieldInput {
+    padding-top: 25px !important; 
     float: inline-start;
 }
 

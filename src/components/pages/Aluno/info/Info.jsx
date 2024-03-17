@@ -91,14 +91,17 @@ const Info = () => {
         </div>
 
         <div className="fieldContainer text-input checkbox-container">
-            <label for="checkboxInput" className="fieldInput">Aluno ativo:</label>
             <input
                 type="checkbox"
                 id="checkboxInput"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
             />
+
+            <label for="checkboxInput" className="fieldInput">Aluno ativo?</label>
+
         </div>
+        
                 
         <div className="serie_btns">
             <button type='submit' className="concluirButton">
