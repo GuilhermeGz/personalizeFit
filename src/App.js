@@ -26,29 +26,26 @@ function App() {
 
         <Routes>
           <Route exact path="/" element={<Login />} />
+
           <Route path="/signup" element={<Signup />} />
+
           <Route path="/forgot" element={<Forgot />} />
 
-          {/* ok */}
-          <Route path="/Training/Preset" element={<PresetTraining />} />
-
-          {/* ok */}
-          <Route path="/Training/Create" element={<CreateTraining />} />
-
-          {/* ok */}
           <Route path="/Exercise/List" element={<ListExercise />} />
 
-          {/* ok */}
           <Route path="/Exercise/Create" element={<CreateExercise />} />
 
-          {/* ok */}
           <Route path="/Serie/Create" element={<CreateSerie />} />
+
+          <Route path="/Serie/Update" element={<UpdateSerie />} />
+
+          <Route path="/Training/Preset" element={<PresetTraining />} />
+
+          <Route path="/Training/Create" element={<CreateTraining />} />
 
           <Route path="/Training/Update" element={<UpdateTraining />} />
 
           <Route path="/Training/Group/List" element={<GroupListTraining />} />
-
-          <Route path="/Serie/Update" element={<UpdateSerie />} />
 
           <Route path="/Training/Preset/Create" element={<CreatePreset />} />
         </Routes>
