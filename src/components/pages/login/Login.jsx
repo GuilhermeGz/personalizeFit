@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
 
@@ -14,11 +14,8 @@ const Login = () => {
         password: userPassword
     }
 
-    console.log(userData);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Teste de login')
 
         await fetch('http://localhost:8000/user/api/auth/Login', {
             method: 'POST',
@@ -36,14 +33,12 @@ const Login = () => {
             }
         })
         .then(data => {
-            console.log('Resposta da solicitação POST:', data);
+            navigate('/Training/Preset', {state: { userData: data}});
         })
         .catch(error => {
             console.error('Erro na solicitação POST:', error);
         });
-
-
-        navigate('/Training/Preset');
+        
     }
 
   return (

@@ -9,6 +9,7 @@ const Preset = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const userData = location.state && location.state.userData;
 
   const fetchTrainingPresetList = async () => {
     const response = await fetch(
@@ -19,6 +20,8 @@ const Preset = () => {
   };
 
   useEffect(() => {
+    console.log("Dados do Usuário");
+    console.log(userData);
     const fetchTrainingPresetListExec = async () => {
       function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
