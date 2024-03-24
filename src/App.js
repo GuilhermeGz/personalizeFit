@@ -19,6 +19,7 @@ import Navbar from "./Navbar";
 import InfoAluno from "./components/pages/Aluno/info/Info"
 import CreateAluno from "./components/pages/Aluno/Create/Create"
 import AssociationAluno from './components/pages/Aluno/Association/Association';
+import TrainerStudents from './components/pages/Trainer/Students/Students'
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
 
           <Route path="/Aluno/Association" element={<AssociationAluno />} />
 
-
+          <Route path="/Trainer/Students" element={<TrainerStudents />} />
 
         </Routes>
       </BrowserRouter>

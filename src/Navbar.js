@@ -11,6 +11,9 @@ const Navbar = () => {
         <li className="navbar-item"><Link to="/forgot">Recuperar Senha</Link></li>
         <li className="navbar-item"><Link to="/Training/Preset">Preset De Treinos</Link></li>
         <li className="navbar-item"><Link to="/Exercise/Create">Solicitar Exercicio</Link></li>
+        <li className="navbar-item"><Link to="/Aluno/info">Informações do Aluno</Link></li>
+        <li className="navbar-item"><Link to="/Aluno/Create">Registro do Aluno</Link></li>
+        <li className="navbar-item"><Link to="/Aluno/Association">Associções do Aluno</Link></li>
       </ul>
     </nav>
   );

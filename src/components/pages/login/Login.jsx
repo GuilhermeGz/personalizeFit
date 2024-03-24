@@ -33,7 +33,10 @@ const Login = () => {
             }
         })
         .then(data => {
-            navigate('/Training/Preset', {state: { userData: data}});
+            data = JSON.parse(data); 
+            // navigate('/Training/Preset', {state: { userData: data.access_token}});
+            navigate('/Trainer/Students', {state: { userData: data.access_token}});
+
         })
         .catch(error => {
             console.error('Erro na solicitação POST:', error);
