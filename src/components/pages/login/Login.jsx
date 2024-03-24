@@ -1,15 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
 
 const Login = () => {
 
-    const navigate = useNavigate();
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    const userData ={
+        email: userEmail,
+        password: userPassword
+    }
+
+    console.log(userData);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('teste')
+        console.log('Teste de login')
+
+        await fetch('http://localhost:8000/user/api/auth/Login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            console.log('Resposta da solicitação POST:', data);
+        })
+        .catch(error => {
+            console.error('Erro na solicitação POST:', error);
+        });
+
+
         navigate('/Training/Preset');
     }
 
@@ -24,11 +57,23 @@ const Login = () => {
                 </div>
                 <label htmlFor="">
                     <p>E-mail / Telefone:</p>
-                    <input type="text" className='inputLogin'/>
+                    <input
+                        type="text"
+                        className='inputLogin'
+                        placeholder='E-mail ou Telefone'
+                        value={userEmail}
+                        onChange={(e) => setUserEmail(e.target.value)}
+                        />
                 </label>
                 <label htmlFor="">
                     <p>Senha:</p>
-                    <input type="password" className='inputLogin'/>
+                    <input 
+                        type="password"
+                        className='inputLogin'
+                        placeholder='Senha'
+                        value={userPassword}
+                        onChange={(e) => setUserPassword(e.target.value)}    
+                        />
                 </label>
                 <br />
                 <div className='btns'>
