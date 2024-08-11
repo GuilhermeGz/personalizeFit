@@ -14,6 +14,8 @@ const Create = () => {
     const [trainingAux, setTrainingAux] = useState(location.state && location.state.trainingAux);
     const [requestProcessed, setRequestProcessed] = useState(false);
     const tipo = location.state && location.state.tipo;
+    const userData = location.state && location.state.userData;
+
 
     const handleAddSerie = () => {
       const newSeries = series.concat({
@@ -65,11 +67,11 @@ const Create = () => {
 
         if (tipo == "create") {
           navigate(`/Training/Create`, {
-            state: { trainingAux1: trainingAux },
+            state: { trainingAux1: trainingAux, userData: userData },
           });
         } else {
           navigate(`/Training/Update`, {
-            state: { trainingGroup: trainingAux },
+            state: { trainingGroup: trainingAux,  userData: userData },
           });
         }
       }
@@ -84,7 +86,11 @@ const Create = () => {
 
         try {
           const response = await fetch(
-            `http://localhost:8000/exercise/api/Exercise/${exerciseId}`
+            `http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${exerciseId}`, {
+              headers: {
+               'Authorization': `Bearer ${userData.access_token}`
+              }
+            }
           );
           const data = await response.json();
           setExerciseName(data.name);

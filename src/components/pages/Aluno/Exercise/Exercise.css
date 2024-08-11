@@ -1,0 +1,440 @@
+/* style.css */
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: -webkit-center;
+
+}
+
+.title {
+    margin-top: 3%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    font-size: 42px;
+}
+
+.underline {
+    width: 60vw;
+    height: 2px;
+    background-color: #ffffff;
+    margin: 0 auto;
+}
+
+.text-input {
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+.text-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.text-input input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.square-box {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.inner-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Permite a quebra de linha quando necessário */
+
+}
+
+.cardContainerTreinador {
+    align-items: center;
+    background-color: white;
+    padding: 12px;
+    border-radius: 20px;
+    margin: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    width: calc(25% - 24px);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+.bntAccountContainerTraining {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 100%; 
+    height: 100%; 
+    flex-direction: row !important;
+}
+
+
+.icon {
+    font-size: 35px;
+    color: #1D3557;
+}
+
+.cardText {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1D3557;
+}
+
+.cardContact {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contactIcon {
+    margin-left: 0rem;
+    margin-right: 3rem;
+  }
+  
+  .mailIcon {
+    margin-left: 3rem;
+    margin-right: 0rem;
+  }
+
+  .cardContact {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cardText {
+    margin-right: 25px; /* Ajuste a margem entre o texto e o ícone */
+    margin-left: 25px; /* Ajuste a margem entre o texto e o ícone */
+
+  }
+
+  .cardTrainingAsso{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 100%; 
+    height: 100%; 
+    flex-direction: column;
+  }
+
+  .buttonTreino{
+    display: flex;
+    flex-flow: column;
+    background-color: #E63946;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .iconTreino{
+    margin-left: 5px;
+  }
+
+  .button-container {
+    margin-top: 80px;
+    display: flex;
+  }
+  
+  .button-container div {
+    margin-right: 15px;
+    width: 100%;
+  }
+  
+  .button-container div:last-child {
+    margin-right: 0;
+  }
+
+   /* ffsa */
+   .button-container {
+    display: flex;
+  }
+  
+  .buttonTreino {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #E63946;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;    
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    width: 120px;
+  }
+  
+  .buttonTreino:last-child {
+    margin-right: 0;
+  }
+  
+  .iconTreino {
+    margin-bottom: 5px;
+    color: #FFFFFF;
+
+  }
+  .trainer-profile {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .trainer-profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff; /* Fundo branco em forma de círculo */
+  }
+  
+  .trainer-details {
+    margin-left: 20px;
+  }
+  
+  .trainer-details h1 {
+    margin-bottom: 5px;
+  }
+
+  .bntAccountContainerTraining img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #E63946; /* Fundo branco em forma de círculo */
+  }
+  
+  .dados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .titulo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .data,
+  .personal,
+  .objetivo,
+  .divisao,
+  .ativo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .data span:first-child,
+  .personal span:first-child,
+  .objetivo span:first-child,
+  .divisao span:first-child,
+  .ativo span:first-child {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .CardGroup{
+    display: flex;
+    flex-flow: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .icon-middle {
+    margin: 20px 0;
+  }
+  
+  .training-set {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .training-set p {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .blue-letter {
+    font-weight: bold;
+
+    color: #1D3557;
+  }
+
+  .black-letter {
+    color: #000000;
+    font-weight: bold;
+
+  }
+
+  .training-set {
+    position: relative;
+    padding: 10px;
+  }
+  
+  .rest-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px; /* Ajuste conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .rest-time p {
+    margin-left: 5px;
+    font-weight: bold;
+  }
+  
+  /* Exercise.css */
+
+
+
+  .training-set {
+    position: relative;
+    padding: 10px;
+  }
+  
+  .rest-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px; /* Ajuste conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .rest-time p {
+    margin-left: 5px;
+  }
+  
+  .icon-row {
+    display: flex;
+    justify-content: right
+  }
+  
+  .next-exercise-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white; 
+    color: #1D3557;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 64px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .next-exercise-button:hover {
+    /* background-color: #45a049;  */
+  }
+  
+  .next-exercise-button svg {
+    margin-left: 0; /* Remover espaço, pois não há texto */
+  }
+  
+  .dumbell{
+    justify-content: center
+  }
+
+  .exercise-header {
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .exercise-header h2 {
+    margin-left: auto; /* Move o nome para o centro */
+  }
+  
+  .rest{
+    display: flex;
+    place-content: center;
+  }
+
+  .rest-text{
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+
+  .rest-label{
+    font-size: 25px;
+    margin-bottom: 5px;
+
+  }
+
+  .exercise-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+  }
+  
+  .dumbbell-exercise {
+    margin-left: auto;
+    padding-left: 50px;
+  }
+  
+  .icon-row {
+    margin-left: auto;
+  }
+
+  .change-exercise{
+    /* margin-right: 500px; */
+    float: left;
+  }
+
+  .info-exercise{
+    float: right;
+  }
+
+.prev-set-button,
+.next-set-button {
+  background-color: transparent;
+  border: none;
+  color: #1D3557;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.training-set {
+  flex: 1;
+  text-align: center;
+}
+

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
+import { jwtDecode } from "jwt-decode";
+import UploadVideo from '../../../UploadVideo';
 
 const Login = () => {
 
@@ -17,7 +19,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await fetch('http://localhost:8000/user/api/auth/Login', {
+        await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/Login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +36,22 @@ const Login = () => {
         })
         .then(data => {
             data = JSON.parse(data); 
-            // navigate('/Training/Preset', {state: { userData: data.access_token}});
-            navigate('/Trainer/Students', {state: { userData: data.access_token}});
+            const decoded = jwtDecode(data.access_token);
+
+            if (decoded.realm_roles.includes("trainer-role")) {
+                console.log("entrou aqui");
+                navigate('/Trainer/Home', {state: { userData: data}});
+
+            } else if (decoded.realm_roles.includes("student-role")) {
+                navigate('/Aluno/Home', {state: { userData: data}});
+
+            }else{
+                console.log("entrou aqui2");
+
+               // navigate('/Aluno/Home', {state: { userData: data}});
+
+            }
+
 
         })
         .catch(error => {
@@ -43,6 +59,9 @@ const Login = () => {
         });
         
     }
+
+
+
 
   return (
     <div className='main'>
@@ -84,6 +103,7 @@ const Login = () => {
                 <Link to="/forgot" className="linkDireita">Recuperar senha</Link>
             </div>
 
+            {/* <UploadVideo /> */}
         </div>
     </div>
 

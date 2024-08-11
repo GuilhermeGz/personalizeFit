@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import './style.css'; 
 import { FaDumbbell } from 'react-icons/fa';
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const Create = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
-    dateOfBirth: '',
-    phoneNumber: '',
+    password: `123`
+   // dateOfBirth: '',
+   // phoneNumber: '',
   });
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const data = location.state && location.state.userData;
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (event) => {
@@ -23,11 +30,54 @@ const Create = () => {
     setIsChecked(event.target.checked);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(); 
     console.log('Form submitted:', formData);
     console.log('Checkbox checked:', isChecked); 
+       
+    try {
+      const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register-student', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${data.access_token}`
+
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Dados enviados com sucesso!');
+        navigate('/Trainer/Home', {state: { userData: data}});
+        // Redirecionar ou mostrar mensagem de sucesso, etc.
+      } else {
+        console.error('Erro ao enviar dados:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao realizar a solicitação:', error);
+    }
+    
+
   };
+
+  useEffect(() => {
+    // fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/teste', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Authorization': `Bearer ${userData}`
+    //   }
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //   console.log("Retorno da Solicitação:");
+    //   console.log(data);
+    //   // setTrainerStudents(data);
+    // })
+    // .catch(error => {
+    //   console.error('Erro na solicitação GET:', error);
+    //   navigate('/');
+    // });
+  }, []);
 
   return (
     <div className='main'>
@@ -48,9 +98,9 @@ const Create = () => {
           <input
             type="text"
             id="nameInput"
-            name="name"
+            name="username"
             placeholder="Digite seu nome"
-            value={formData.name}
+            value={formData.username}
             onChange={handleChange}
           />
         </div>
@@ -71,8 +121,8 @@ const Create = () => {
             type="date"
             id="dateOfBirthInput"
             name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleChange}
+          //  value={formData.dateOfBirth}
+          //  onChange={handleChange}
           />
         </div>
         <div className='fieldContainer text-input'>
@@ -82,8 +132,8 @@ const Create = () => {
             id="phoneNumberInput"
             name="phoneNumber"
             placeholder="Digite seu telefone"
-            value={formData.phoneNumber}
-            onChange={handleChange}
+           // value={formData.phoneNumber}
+           // onChange={handleChange}
           />
         </div>
 
@@ -91,8 +141,8 @@ const Create = () => {
             <input
                 type="checkbox"
                 id="checkboxInput"
-                checked={isChecked}
-                onChange={handleCheckboxChange}
+              //  checked={isChecked}
+              //  onChange={handleCheckboxChange}
             />
             <label for="checkboxInput" className="fieldInput">Aluno ativo?</label>
             

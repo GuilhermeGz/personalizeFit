@@ -74,19 +74,23 @@
     border-radius: 20px;
     margin: 12px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-    width: calc(20% - 24px);
+    width: calc(25% - 24px);
     flex-shrink: 0;
     box-sizing: border-box;
 }
 
-.bntAccountContainer {
-    display: flex;
-    flex-direction: column;
+.bntAccountContainerTraining {
+    display: flex; 
+    justify-content: center; 
     align-items: center;
+    width: 100%; 
+    height: 100%; 
+    flex-direction: row !important;
 }
 
+
 .icon {
-    font-size: 54px;
+    font-size: 35px;
     color: #1D3557;
 }
 
@@ -97,47 +101,38 @@
     color: #1D3557;
 }
 
-.cancelarButton {
-    background: #E63946 !important;
-    margin-right: 50px !important;
-}
+.cardContact {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contactIcon {
+    margin-left: 0rem;
+    margin-right: 3rem;
+  }
+  
+  .mailIcon {
+    margin-left: 3rem;
+    margin-right: 0rem;
+  }
 
-.trashCard {
-    color: red;
-    size: 20px;
-    margin-left: auto;
-}
-
-.title2 {
+  .cardContact {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaça o título e o botão */
   }
   
-  .title2 h1 {
-    margin-left: 150px; /* Remove a margem padrão do título */
-    text-align: center; /* Centraliza o texto dentro do contêiner */
-    flex: 1; /* Faz o título ocupar o espaço disponível */
+  .cardText {
+    margin-right: 25px; /* Ajuste a margem entre o texto e o ícone */
+    margin-left: 25px; /* Ajuste a margem entre o texto e o ícone */
+
   }
-  
-  .concluirButton {
-    background-color: #1D3557; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Remove a borda padrão */
-    padding: 10px 20px; /* Espaçamento interno do botão */
-    border-radius: 5px; /* Bordas arredondadas do botão */
-    cursor: pointer; /* Altera o cursor para indicar que é clicável */
-    font-size: 1rem; /* Tamanho da fonte do botão */
-    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
-  }
-  
-  .concluirButton:hover {
-    background-color: #457b9d; /* Cor do botão ao passar o mouse */
-  }
-  
-  .underline {
-    height: 2px; /* Altura da linha embaixo do título */
-    background-color: #1D3557; /* Cor da linha */
-    width: 100%; /* Largura total do contêiner */
-    margin-top: 10px; /* Espaçamento acima da linha */
+
+  .cardTrainingAsso{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 100%; 
+    height: 100%; 
+    flex-direction: column;
   }

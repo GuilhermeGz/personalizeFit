@@ -1,8 +1,9 @@
 body {
     background: linear-gradient(152deg, #1D1D2A 33.19%, #34607C 106.91%);
-    height: 100vh;
+    height: 125vh;
     color: #FFF;
     background-repeat: no-repeat;
+
 }
 
 .main .logo h1 {

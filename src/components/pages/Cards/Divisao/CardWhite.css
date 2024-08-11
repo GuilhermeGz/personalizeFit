@@ -1,0 +1,56 @@
+.card-white {
+    width: 350px;
+    height: 350px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+  }
+  
+  .card-white-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-white-header {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-white-letter {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  /* CardWhite.css */
+.card-white {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.card-white-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-white-header {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card-white-body {
+  width: 100%;
+  margin-top: 10px;
+  color: black;
+}

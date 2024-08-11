@@ -13,7 +13,11 @@ const Preset = () => {
 
   const fetchTrainingPresetList = async () => {
     const response = await fetch(
-      "http://localhost:8000/training/api/TrainingPreset"
+      "http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingPreset",{
+        headers: {
+           'Authorization': `Bearer ${userData.access_token}`
+        }
+      }
     );
     const data = await response.json();
     setTrainingPresetList(data);
@@ -37,18 +41,19 @@ const Preset = () => {
   );
 
   const handleButtonClick = () => {
-    // navigate(`/Training/Create`);
-    navigate(`/Training/Preset/Create`);
+    navigate(`/Training/Preset/Create`, {state: { userData: userData}});
   };
 
   const handleButtonClickDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/training/api/TrainingPreset/${id}`,
+        `http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingPreset/${id}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${userData.access_token}`
+          
           },
         }
       );
@@ -64,9 +69,15 @@ const Preset = () => {
   };
 
   const handleButtonClick2 = (trainingPreset) => {
+    console.log("foi aqui");
     navigate(`/Training/Group/List`, {
-      state: { trainingPreset: trainingPreset },
+      state: { trainingPreset: trainingPreset , userData: userData},
     });
+  };
+
+  const handleButtonClick3 = () => {
+    console.log("foi aqui");
+    navigate(`/Trainer/Home`, { state: { userData: userData},});
   };
 
   return (
@@ -117,7 +128,17 @@ const Preset = () => {
               </div>
             </div>
           ))}
+
+        
+
         </div>
+
+        <div className='serie_btns'>
+            <button type='submit' className="concluirButton cancelarButton1" onClick={handleButtonClick3}>
+              Cancelar
+            </button>
+        </div>
+
       </div>
     </div>
   );

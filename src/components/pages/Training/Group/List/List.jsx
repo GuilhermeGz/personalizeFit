@@ -9,11 +9,19 @@ const List = () => {
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
+    const userData = location.state && location.state.userData;
+    const trainingPreset = location.state && location.state.trainingPreset;
 
     useEffect(() => {
+        console.log("Dados do Usuário");
+        console.log(userData);
         console.log(location.state.trainingPreset);
         const fetchTrainingPresetList = async () => {
-            const response = await fetch('http://localhost:8000/training/api/TrainingGroup');
+            const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup', {
+                headers: {
+                    'Authorization': `Bearer ${userData.access_token}`
+                }
+            });
             const data = await response.json();
             setTrainingPresetList(data);
         };
@@ -27,35 +35,37 @@ const List = () => {
     );
 
     const handleButtonClick = () => {
-        navigate(`/Training/Create`, {state: {update: location.state.trainingPreset.id} });
+        console.log("Criação do treino");
+        navigate(`/Training/Create`, {state: {update: location.state.trainingPreset.id, userData: userData} });
     }
 
     const handleButtonClick2 = (trainingGroup) => {
         console.log(trainingGroup);
         console.log("Vai atualizar");
-        navigate(`/Training/Update`, { state: { trainingGroup }});
+        navigate(`/Training/Update`, { state: { trainingGroup, userData: userData}});
     }
 
     const handleConcluirClick = () => {
-        navigate(`/Training/Preset`);
+        navigate(`/Training/Preset`, {state: { userData: userData}});
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Training/Preset`);
+        navigate(`/Training/Preset`, {state: { userData: userData}});
     };
 
     const handleButtonClickDelete = async (preset) => {
         try {
-            const response = await fetch(`http://localhost:8000/training/api/TrainingGroup/${preset.id}`, {
+            const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup/${preset.id}`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userData.access_token}`
+                    
                 }
             });
 
             if (response.ok) {
                 console.log("Preset deleted successfully:", preset);
-                // Atualize a lista de predefinições após a exclusão
                 setTrainingPresetList(prevList => prevList.filter(item => item.id !== preset.id));
             } else {
                 console.error("Failed to delete preset:", response.statusText);
@@ -65,11 +75,20 @@ const List = () => {
         }
     }
 
+    const linkarAlunoTreino = () => {
+        navigate(`/Training/Association`, {state: { userData: userData, trainingPreset: trainingPreset}})
+    };
+
     return (
         <div className='main'>
             <div>
                 <div className='title'>
-                    <h1>Grupos de Treino</h1>
+                    <div className='title2'>
+                        <h1>Grupos de Treino</h1>
+                        <button type='submit' className="concluirButton" onClick={linkarAlunoTreino}>
+                            Associar Aluno
+                        </button>
+                    </div>
                     <div className='underline'></div>
                 </div>
                 <div className='text-input'>

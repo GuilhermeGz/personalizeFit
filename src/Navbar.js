@@ -14,6 +14,12 @@ const Navbar = () => {
         <li className="navbar-item"><Link to="/Aluno/info">Informações do Aluno</Link></li>
         <li className="navbar-item"><Link to="/Aluno/Create">Registro do Aluno</Link></li>
         <li className="navbar-item"><Link to="/Aluno/Association">Associções do Aluno</Link></li>
+
+        <li className="navbar-item"><Link to="/Training/Association">Associções de Treino</Link></li>
+        <li className="navbar-item"><Link to="/Trainer/Home">Home Treinador</Link></li>
+        <li className="navbar-item"><Link to="/Aluno/Home">Home Aluno</Link></li>
+
+
       </ul>
     </nav>
   );

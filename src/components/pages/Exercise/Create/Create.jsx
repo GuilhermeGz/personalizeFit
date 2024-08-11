@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { FaDumbbell, FaPlus } from 'react-icons/fa';
 import "./style.css";
+import { useLocation } from "react-router-dom";
+
 
 const Create = () => {
     const [exerciseName, setExerciseName] = useState('');
@@ -9,32 +11,43 @@ const Create = () => {
     const [selectedMuscleGroup, setSelectedMuscleGroup] = useState('');
     const [similarExercises, setSimilarExercises] = useState([]);
     const [selectedSimilarExercises, setSelectedSimilarExercises] = useState([]);
+    const location = useLocation();
+    const userData = location.state && location.state.userData;
 
     useEffect(() => {
         const fetchMuscleGroups = async () => {
             try {
-                const response = await fetch('http://localhost:8000/exercise/api/MuscularGroup');
+                const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/MuscularGroup', {
+                    headers: {
+                        'Authorization': `Bearer ${userData.access_token}`
+                    }
+                });
                 const data = await response.json();
                 setMuscleGroups(data);
             } catch (error) {
                 console.error('Erro ao buscar os grupos musculares:', error);
             }
         };
-
+    
         fetchMuscleGroups();
     }, []);
-
+    
     useEffect(() => {
         const fetchSimilarExercises = async () => {
             try {
-                const response = await fetch('http://localhost:8000/exercise/api/Exercise');
+                // const token = 'xxx'; 
+                const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise', {
+                    headers: {
+                        'Authorization': `Bearer ${userData.access_token}`
+                    }
+                });
                 const data = await response.json();
                 setSimilarExercises(data);
             } catch (error) {
                 console.error('Erro ao buscar os exercícios semelhantes:', error);
             }
         };
-
+    
         fetchSimilarExercises();
     }, []);
 
@@ -55,10 +68,11 @@ const Create = () => {
 
         console.log(exerciseData);
     
-        fetch('http://localhost:8000/exercise/api/Exercise', {
+        fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userData}` 
             },
             body: JSON.stringify(exerciseData)
         })

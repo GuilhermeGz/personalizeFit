@@ -8,12 +8,17 @@ const Create = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [inputName, setInputName] = useState("");
+  const userData = location.state && location.state.userData;
 
   const cancelButtonClick = () => {
-    navigate(`/Training/Preset`);
+    navigate(`/Training/Preset`, {state: { userData: userData}});
   };
 
   const submitButtonCliclk = () => {
+    console.log("Dados do Usuário1111");
+
+    console.log(userData);
+
     if (inputName.trim() === "") {
       alert("Por favor, insira um título para a predefinição de treino.");
       return;
@@ -21,14 +26,15 @@ const Create = () => {
     const aux = {
       title: inputName,
       presetDefaultFlag: true,
-      trainerId: "1",
+      studentHasTrainingPresets: []
     };
 
     console.log(aux);
-    fetch(`http://localhost:8000/training/api/TrainingPreset`, {
+    fetch(`http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingPreset`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${userData.access_token}`
       },
       body: JSON.stringify(aux),
     })
@@ -47,8 +53,14 @@ const Create = () => {
         console.error("Erro na solicitação POST:", error);
       });
 
-    navigate(`/Training/Preset`);
+    navigate(`/Training/Preset`, {state: { userData: userData}});
   };
+
+
+  useEffect(() => {
+    console.log("Dados do Usuário");
+    console.log(userData);
+  },[]);
 
   return (
     <div className="main">

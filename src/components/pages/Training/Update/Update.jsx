@@ -11,10 +11,15 @@ const Update = () => {
     const [exercises, setExercises] = useState([]);
     const [trainingAux, setTrainingAux] = useState(location.state.trainingGroup);
     const [exerciseUp, setExerciseUp] = useState(location.state && location.state.exerciseAux);
+    const userData = location.state && location.state.userData;
 
     const getExerciseNameById = async (exerciseId) => {
         try {
-            const response = await fetch(`http://localhost:8000/exercise/api/Exercise/${exerciseId}`);
+            const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${exerciseId}`, {
+              headers: {
+                'Authorization': `Bearer ${userData.access_token}`
+              }
+            });
             const data = await response.json();
             return data.name;
         } catch (error) {
@@ -24,11 +29,11 @@ const Update = () => {
     };
 
     const handleConcluirClick = () => {
-        navigate(`/Training/Preset`);
+        navigate(`/Training/Preset`, {state: { userData: userData }} );
     };
 
     const handleConcluirClick1 = () => {
-      navigate(`/Exercise/List`, { state: { trainingAux, tipo: "update" } });
+      navigate(`/Exercise/List`, { state: { trainingAux, tipo: "update", userData: userData } });
     };
 
     const handleConcluirClick2 = () => {
@@ -44,11 +49,13 @@ const Update = () => {
       console.log("Deveria atualizar");
 
       fetch(
-        `http://localhost:8000/training/api/TrainingGroup/${trainingAux.id}`,
+        `http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup/${trainingAux.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${userData.access_token}`
+      
           },
           body: JSON.stringify(resp),
         }
@@ -68,17 +75,15 @@ const Update = () => {
           console.error("Erro na solicitação POST:", error);
         });
 
-      navigate(`/Training/Preset`);
+      navigate(`/Training/Preset`, {state: { userData: userData }});
     };
 
     const handleConcluirClick3 = (exercise) => {
-      navigate(`/Serie/Update`, { state: { exercise, trainingAux } });
+      navigate(`/Serie/Update`, { state: { exercise, trainingAux, userData } });
     };
 
     useEffect(() => {
-      console.log("erro aqui");
-
-      console.log("Aquiiii");
+      console.log("Teste de info");
       console.log(exerciseUp);
       console.log(trainingAux);
       if (trainingAux.trainingGroupHasExercises.length > 0 && exerciseUp) {

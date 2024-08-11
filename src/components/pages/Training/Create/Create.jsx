@@ -11,6 +11,7 @@ const Create = () => {
     const [inputName, setInputName] = useState(""); 
     const [exercises, setExercises] = useState([]);
     const [update, setUpdate] = useState(location.state && location.state.update);
+    const userData = location.state && location.state.userData;
 
     const [trainingAux, setTrainingAux] = useState({
         name: "TrainingAux",
@@ -20,7 +21,11 @@ const Create = () => {
 
     const getExerciseNameById = async (exerciseId) => {
         try {
-            const response = await fetch(`http://localhost:8000/exercise/api/Exercise/${exerciseId}`);
+            const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${exerciseId}`,{
+                headers: {
+                    'Authorization': `Bearer ${userData.access_token}`
+                }
+            });
             const data = await response.json();
             return data.name;
         } catch (error) {
@@ -30,11 +35,11 @@ const Create = () => {
     };
 
     const handleConcluirClick = () => {
-        navigate(`/Training/Preset`);
+        navigate(`/Training/Preset`, { state: { userData: userData}});
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Exercise/List`, { state: { trainingAux, tipo: "create" } });
+        navigate(`/Exercise/List`, { state: { trainingAux, tipo: "create", userData: userData } });
     };
 
     const handleConcluirClick2 = () => {
@@ -47,14 +52,18 @@ const Create = () => {
     };
 
     useEffect(() => {
+        console.log("Dados do Usuário");
+        console.log(userData);
+ 
         if (trainingAux.name != "TrainingAux") {
             console.log("entrou");
             console.log(trainingAux);
 
-            fetch('http://localhost:8000/training/api/TrainingGroup', {
+            fetch('http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userData.access_token}`
                 },
                 body: JSON.stringify(trainingAux)
             })
@@ -73,7 +82,7 @@ const Create = () => {
                 console.error('Erro na solicitação POST:', error);
             });
 
-            navigate(`/Training/Preset`);
+            navigate(`/Training/Preset`, { state: {userData: userData}  });
         }
     }, [trainingAux]);
 

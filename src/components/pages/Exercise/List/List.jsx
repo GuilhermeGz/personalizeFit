@@ -12,6 +12,8 @@ const List = () => {
     const location = useLocation();
     const trainingAux = location.state && location.state.trainingAux;
     const tipo = location.state && location.state.tipo;
+    const userData = location.state && location.state.userData;
+
 
     useEffect(() => {
       console.log("Aquiii");
@@ -19,7 +21,11 @@ const List = () => {
       console.log(trainingAux);
       const fetchExerciseList = async () => {
         const response = await fetch(
-          "http://localhost:8000/exercise/api/Exercise"
+          "http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise", {
+            headers: {
+                 'Authorization': `Bearer ${userData.access_token}`
+            }
+          }
         );
         const data = await response.json();
         setExerciseList(data);
@@ -33,11 +39,11 @@ const List = () => {
     );
 
     const handleConcluirClick = (exerciseId) => {
-      navigate(`/Serie/Create`, { state: { exerciseId, trainingAux, tipo } });
+      navigate(`/Serie/Create`, { state: { exerciseId, trainingAux, tipo, userData } });
     };
 
     const handleConcluirClick1 = () => {
-        navigate(`/Training/Create`);
+        navigate(`/Training/Create`, {state: {userData}});
     };
 
     return (

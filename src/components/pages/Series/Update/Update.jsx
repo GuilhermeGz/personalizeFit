@@ -13,8 +13,7 @@ const Update = () => {
     const [observation, setObservation] = useState(exerciseAux.observation);
     const [exerciseName, setExerciseName] = useState(exerciseAux.name);
     const [series, setSeries] = useState([]);
-
-
+    const userData = location.state && location.state.userData;
 
 
     const handleAddSerie = () => {
@@ -58,7 +57,7 @@ const Update = () => {
         if (requestProcessed) {
             console.log("Novo trainingAux:", exerciseAux);
             console.log(location.state.trainingAux);
-            navigate(`/Training/Update`, { state: { exerciseAux: exerciseAux, trainingGroup: location.state.trainingAux } });
+            navigate(`/Training/Update`, { state: { exerciseAux: exerciseAux, trainingGroup: location.state.trainingAux, userData: userData } });
         }
     }, [requestProcessed]);
 
