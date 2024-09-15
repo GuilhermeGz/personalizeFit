@@ -12,6 +12,7 @@ const Create = () => {
     const [selectedSimilarExercises, setSelectedSimilarExercises] = useState([]);
     const location = useLocation();
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     const [file, setFile] = useState(null);
     const [fileType, setFileType] = useState('');

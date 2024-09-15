@@ -10,6 +10,7 @@ const Equivalent = () => {
   const userData = location.state && location.state.userData;
   const userExerciseId = location.state && location.state.id;
   const [equivalentExercises, setEquivalentExercises] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     getEquivalentExercises(userExerciseId);

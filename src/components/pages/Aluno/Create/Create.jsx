@@ -15,6 +15,7 @@ const Create = () => {
   const navigate = useNavigate();
   const data = location.state && location.state.userData;
   const [isChecked, setIsChecked] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   const handleChange = (event) => {
     setFormData({

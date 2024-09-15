@@ -9,7 +9,8 @@ const Preset = () => {
   const location = useLocation();
   const userData = location.state && location.state.userData;
   const [trainerStudents, setTrainerStudents] = useState([]);
-  
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
   // Exemplo de dados de alunos
   const exampleStudents = [
     { id: 1, name: "Alice" },

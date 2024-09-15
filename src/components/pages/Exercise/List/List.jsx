@@ -13,6 +13,7 @@ const List = () => {
     const trainingAux = location.state && location.state.trainingAux;
     const tipo = location.state && location.state.tipo;
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
 
     useEffect(() => {

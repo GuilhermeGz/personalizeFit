@@ -12,6 +12,7 @@ const Create = () => {
     const [exercises, setExercises] = useState([]);
     const [update, setUpdate] = useState(location.state && location.state.update);
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
     const [trainingAux, setTrainingAux] = useState({
         name: "TrainingAux",

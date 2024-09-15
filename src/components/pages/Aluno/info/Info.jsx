@@ -16,6 +16,7 @@ const Info = () => {
 
   const userData = location.state && location.state.userData;
   const studentInfo = location.state && location.state.studentInfo;
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
 
   useEffect(() => {

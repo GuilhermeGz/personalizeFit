@@ -10,6 +10,8 @@ const Preset = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const userData = location.state && location.state.userData;
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
 
   const fetchTrainingPresetList = async () => {
     const response = await fetch(

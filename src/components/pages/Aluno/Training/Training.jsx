@@ -13,6 +13,7 @@ const Training = () => {
   const userTraining = location.state && location.state.training;
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [exerciseNames, setExerciseNames] = useState({});
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     if (selectedGroup !== null) {

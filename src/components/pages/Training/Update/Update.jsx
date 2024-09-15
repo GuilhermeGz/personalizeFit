@@ -12,6 +12,8 @@ const Update = () => {
     const [trainingAux, setTrainingAux] = useState(location.state.trainingGroup);
     const [exerciseUp, setExerciseUp] = useState(location.state && location.state.exerciseAux);
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
 
     const getExerciseNameById = async (exerciseId) => {
         try {

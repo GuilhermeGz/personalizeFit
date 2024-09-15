@@ -15,6 +15,7 @@ const Create = () => {
     const [requestProcessed, setRequestProcessed] = useState(false);
     const tipo = location.state && location.state.tipo;
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
 
     const handleAddSerie = () => {

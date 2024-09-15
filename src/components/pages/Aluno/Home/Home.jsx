@@ -16,6 +16,7 @@ const Home = () => {
   const userData = location.state && location.state.userData;
   const [userSessionImage, setUserSessionImage] = useState("");
   const [userSessionName, setUserSessionName] = useState("");
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
 
   useEffect(() => {

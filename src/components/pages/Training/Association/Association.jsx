@@ -11,7 +11,8 @@ const Association = () => {
   const [associatedStudents, setAssociatedStudents] = useState([]);
   const userData = location.state && location.state.userData;
   const [trainingPreset, setTrainingPreset] = useState(location.state && location.state.trainingPreset);
- 
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
   useEffect(() => {
 
     console.log("no effect");

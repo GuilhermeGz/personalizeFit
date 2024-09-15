@@ -26,6 +26,7 @@ const Exercise = () => {
   // Carregar imagem
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     const fetchImageData = async () => {

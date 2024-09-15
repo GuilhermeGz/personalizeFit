@@ -9,6 +9,7 @@ const Association = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [associatedStudents, setAssociatedStudents] = useState([]);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   const handleButtonClick = () => {
     // Fazer algo aqui 2

@@ -14,6 +14,7 @@ const Update = () => {
     const [exerciseName, setExerciseName] = useState(exerciseAux.name);
     const [series, setSeries] = useState([]);
     const userData = location.state && location.state.userData;
+    const [token, setToken] = useState(localStorage.getItem('token'));
 
 
     const handleAddSerie = () => {

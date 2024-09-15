@@ -9,6 +9,8 @@ const Create = () => {
   const location = useLocation();
   const [inputName, setInputName] = useState("");
   const userData = location.state && location.state.userData;
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
 
   const cancelButtonClick = () => {
     navigate(`/Training/Preset`, {state: { userData: userData}});
