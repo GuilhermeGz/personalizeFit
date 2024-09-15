@@ -1,10 +1,10 @@
 body {
     background: linear-gradient(152deg, #1D1D2A 33.19%, #34607C 106.91%);
-    height: 125vh;
+    min-height: 100vh; 
     color: #FFF;
     background-repeat: no-repeat;
-
 }
+
 
 .main .logo h1 {
     color: #457B9D;

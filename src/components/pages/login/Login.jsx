@@ -35,8 +35,13 @@ const Login = () => {
             }
         })
         .then(data => {
+
             data = JSON.parse(data); 
             const decoded = jwtDecode(data.access_token);
+            console.log("Teste de token");
+            console.log(decoded);
+            localStorage.setItem('token', data.access_token);
+
 
             if (decoded.realm_roles.includes("trainer-role")) {
                 console.log("entrou aqui");
@@ -48,7 +53,7 @@ const Login = () => {
             }else{
                 console.log("entrou aqui2");
 
-               // navigate('/Aluno/Home', {state: { userData: data}});
+               navigate('/Exercise/Create', {state: { userData: data}});
 
             }
 

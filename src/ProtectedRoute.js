@@ -9,10 +9,12 @@ const ProtectedRoute = ({ element, ...rest }) => {
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
+    setAuthStatus('authenticated');
+
     const updateToken = async () => {
       if (userData) {
         try {
-          console.log("Tentando atualizar o token...");
+          // console.log("Tentando atualizar o token...");
           
           const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/refresh-token', {
             method: 'POST',
@@ -32,10 +34,10 @@ const ProtectedRoute = ({ element, ...rest }) => {
               expires_in: data.expires_in,
             }));
             setAuthStatus('authenticated');
-            console.log("Token atualizado com sucesso!");
+            // console.log("Token atualizado com sucesso!");
           } else {
             setAuthStatus('unauthenticated');
-            console.log("Falha ao atualizar o token.");
+            // console.log("Falha ao atualizar o token.");
           }
         } catch (error) {
           console.error('Erro ao atualizar o token:', error);
@@ -57,25 +59,25 @@ const ProtectedRoute = ({ element, ...rest }) => {
         const timeUntilUpdate = Math.max(interval - (currentTime % interval), 0);
 
         setTimer(timeUntilUpdate);
-        console.log(`Tempo restante até a próxima atualização: ${timeUntilUpdate} ms`);
+        // console.log(`Tempo restante até a próxima atualização: ${timeUntilUpdate} ms`);
       }
     };
 
     // Atualiza o token imediatamente ao montar o componente e define o temporizador
-    updateToken();
-    calculateTimeUntilUpdate();
+    // updateToken();
+    // calculateTimeUntilUpdate();
 
-    // Define um intervalo para atualizar o token a cada 200 segundos
-    const intervalId = setInterval(() => {
-      console.log("Tempo para atualizar o token passou. Atualizando...");
-      updateToken();
-      calculateTimeUntilUpdate();
-    }, 20000); // 20000 ms = 20 s
+    // // Define um intervalo para atualizar o token a cada 200 segundos
+    // const intervalId = setInterval(() => {
+    //   // console.log("Tempo para atualizar o token passou. Atualizando...");
+    //   updateToken();
+    //   calculateTimeUntilUpdate();
+    // }, 20000); // 20000 ms = 20 s
 
     // Limpa o intervalo quando o componente for desmontado
     return () => {
-      console.log("Componente desmontado. Limpando intervalo.");
-      clearInterval(intervalId);
+      // console.log("Componente desmontado. Limpando intervalo.");
+      // clearInterval(intervalId);
     };
   }, [userData]);
 

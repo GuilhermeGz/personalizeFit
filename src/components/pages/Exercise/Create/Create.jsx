@@ -4,7 +4,6 @@ import { FaDumbbell, FaPlus } from 'react-icons/fa';
 import "./style.css";
 import { useLocation } from "react-router-dom";
 
-
 const Create = () => {
     const [exerciseName, setExerciseName] = useState('');
     const [muscleGroups, setMuscleGroups] = useState([]);
@@ -13,6 +12,11 @@ const Create = () => {
     const [selectedSimilarExercises, setSelectedSimilarExercises] = useState([]);
     const location = useLocation();
     const userData = location.state && location.state.userData;
+
+    const [file, setFile] = useState(null);
+    const [fileType, setFileType] = useState('');
+    const [inputType, setInputType] = useState('file'); // Novo estado para controlar o tipo de input
+    const [url, setUrl] = useState(''); // Estado para armazenar a URL, caso seja selecionado o modo de URL
 
     useEffect(() => {
         const fetchMuscleGroups = async () => {
@@ -35,7 +39,6 @@ const Create = () => {
     useEffect(() => {
         const fetchSimilarExercises = async () => {
             try {
-                // const token = 'xxx'; 
                 const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise', {
                     headers: {
                         'Authorization': `Bearer ${userData.access_token}`
@@ -55,6 +58,9 @@ const Create = () => {
         setExerciseName('');
         setSelectedMuscleGroup('');
         setSelectedSimilarExercises([]);
+        setFile(null);
+        setFileType('');
+        setUrl('');
     };
 
     const handleRequest = () => {
@@ -63,7 +69,7 @@ const Create = () => {
             muscularGroupId: selectedMuscleGroup,
             equivalentExerciseIds: selectedSimilarExercises,
             status: "valido",
-            trainerId: "inexistente"
+            trainerId: "1"
         };
 
         console.log(exerciseData);
@@ -72,7 +78,7 @@ const Create = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userData}` 
+                'Authorization': `Bearer ${userData.access_token}` 
             },
             body: JSON.stringify(exerciseData)
         })
@@ -86,14 +92,71 @@ const Create = () => {
         })
         .then(data => {
             clearFields();
+            console.log("Exercício criado com sucesso");
+            
+            const exerciseId = 1; // Assumindo que o ID do exercício criado é retornado aqui
 
-            console.log('Resposta da solicitação POST:', data);
+            if (inputType === 'file') {
+                const formData = new FormData();
+                formData.append('Name', fileType);
+                formData.append('FileData', file);
+
+                return fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${userData.access_token}`
+                    },
+                    body: formData
+                }).then(response => response.json())
+                  .then(fileData => ({ exerciseId, fileId: fileData })); // Retorna o fileId junto com o exerciseId
+            } else if (inputType === 'url') {
+                const formData = new FormData();
+                formData.append('Name', fileType);
+                formData.append('Path', url);
+           
+                return fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File/url', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${userData.access_token}`
+                    },
+                    body: formData
+                }).then(response => response.json())
+                  .then(fileData => ({ exerciseId, fileId: fileData })); // Retorna o fileId junto com o exerciseId
+            }
+        })
+        .then(({ exerciseId, fileId }) => {
+            console.log(exerciseId);
+            console.log(fileId);
+            
+
+            const exerciseFile = {
+                exerciseId: 39, // Substitua pelo ID real do exercício
+                fileId: fileId,
+                fileType: "string",
+            };
+            
+        console.log(exerciseFile);
+        
+
+            return fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/ExerciseHasFile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userData.access_token}`
+                },
+                body: JSON.stringify(exerciseFile)
+            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao associar o arquivo ao exercício');
+            }
+            console.log("Associação do arquivo ao exercício criada com sucesso");
         })
         .catch(error => {
             console.error('Erro na solicitação POST:', error);
         });
     };
-    
 
     return (
         <div className='main'>
@@ -152,20 +215,72 @@ const Create = () => {
                         />
                     </label>
                 </div>
-                <div className="content">
-                    <div className="cardContainer">
-                        <div className="bntAccountContainer">
-                            <FaPlus className='icon' />
-                            <p className="cardText">Adicionar Exercício</p>
+
+                <div className='text-input'>
+                    <label>
+                        <span className='labelTextArea'>Tipo de Envio:</span>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="file"
+                                    checked={inputType === 'file'}
+                                    onChange={() => setInputType('file')}
+                                />
+                                Arquivo
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="url"
+                                    checked={inputType === 'url'}
+                                    onChange={() => setInputType('url')}
+                                />
+                                URL
+                            </label>
                         </div>
-                    </div>
-                    {/* <div className="cardContainer">
-                        <div className="bntAccountContainer">
-                            <FaDumbbell className='icon' />
-                            <p className="cardText">Exercício 1</p>
-                        </div>
-                    </div> */}
+                    </label>
                 </div>
+
+                <div className='text-input'>
+                    <label htmlFor="fileTypeInput">
+                        <span className='labelTextArea'>Tipo de Arquivo:</span>
+                        <input
+                            className="textArea"
+                            id="fileTypeInput"
+                            placeholder="Digite o tipo de arquivo"
+                            value={fileType}
+                            onChange={(e) => setFileType(e.target.value)}
+                        />
+                    </label>
+                </div>
+
+                {inputType === 'file' ? (
+                    <div className='text-input'>
+                        <label htmlFor="fileInput">
+                            <span className='labelTextArea'>Arquivo:</span>
+                            <input
+                                type="file"
+                                id="fileInput"
+                                onChange={(e) => setFile(e.target.files[0])}
+                            />
+                        </label>
+                    </div>
+                ) : (
+                    <div className='text-input'>
+                        <label htmlFor="urlInput">
+                            <span className='labelTextArea'>URL:</span>
+                            <input
+                                className="textArea"
+                                id="urlInput"
+                                placeholder="Digite a URL"
+                                value={url}
+                                onChange={(e) => setUrl(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                )}
+
                 <div className="serie_btns">
                     <button type='submit' className="concluirButton" onClick={handleRequest}>
                         <span>Solicitar</span>

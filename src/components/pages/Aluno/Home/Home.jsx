@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./style.css";
 import CardWhite from "../../Cards/Divisao/CardWhite";
+import { jwtDecode } from "jwt-decode";
+import UserImage from "../../../../img/user.jpg"
+// import jwt from 'jsonwebtoken'; // Importar jwt corretamente
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -11,7 +14,56 @@ const Home = () => {
   const location = useLocation();
   const [trainingPresets, setTrainingPresets] = useState([]);
   const userData = location.state && location.state.userData;
+  const [userSessionImage, setUserSessionImage] = useState("");
+  const [userSessionName, setUserSessionName] = useState("");
 
+
+  useEffect(() => {
+    const decoded = jwtDecode(userData.access_token);     
+    const userSessionId = decoded.sub; 
+    setUserSessionName(decoded.preferred_username)
+    console.log(decoded.preferred_username);
+    
+    console.log(userSessionId);
+    console.log("sid acima");
+
+    const fetchData = async () => {
+    try {
+      const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/user/api/UserHasFile/?userId=${userSessionId}`, {
+        headers: {
+          'Authorization': `Bearer ${userData.access_token}`
+        }
+      });
+      const fileData = await imageResponse.json();
+      let fileId = null;
+
+      if (Array.isArray(fileData) && fileData.length > 0) {
+        fileId = fileData[0].fileId;
+      }            
+      
+      console.log(fileId);
+      console.log("sid acima2");
+      if (fileId) {
+        const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/file/api/file/${fileId}`, {
+          headers: {
+            'Authorization': `Bearer ${userData.access_token}`
+          }
+        });
+        const imageFileData = await imageResponse.json();
+        const { fileBytes, extension } = imageFileData;
+        const imageObjectURL = `data:image/${extension};base64,${fileBytes}`;
+        setUserSessionImage(imageObjectURL)
+      } else {
+        setUserSessionImage(UserImage)
+      }
+    } catch (error) {
+      console.error(`Erro ao buscar imagem para aluno ${userSessionId}:`, error);
+      setUserSessionImage(UserImage)
+    }
+  };
+
+  fetchData();
+  }, []);
 
   // useEffect(() => {
   //   // Simulação de dados dos alunos associados
@@ -23,7 +75,12 @@ const Home = () => {
   //   setAssociatedStudents(simulatedData);
   // }, []);
 
-  
+  // useEffect(() => {
+  //   const decoded = jwt.decode(userData);
+
+  //   console.log(decoded);
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -85,10 +142,10 @@ const Home = () => {
       <div className="trainer-info">
 
         <div className="trainer-profile">
-          <img src="treinador.jpg" alt="Treinador" />
+          <img src={userSessionImage} alt="Treinador" className="student-avatar" />
           <div className="trainer-details">
-            <h1>Aluno Corno</h1>
-            <p>Idade: 30 anos</p> 
+            <h1>{userSessionName.toUpperCase()}</h1>
+            {/* <p>Idade: 30 anos</p>  */}
           </div>
         </div>
 

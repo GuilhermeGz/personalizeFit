@@ -1,5 +1,11 @@
 /* style.css */
-
+.uploaded-image {
+    width: 150px; /* Ajuste conforme necessário */
+    height: 150px; /* Ajuste conforme necessário */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
 .main {
     display: flex;
     justify-content: center;

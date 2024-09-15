@@ -222,7 +222,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #E63946; /* Fundo branco em forma de círculo */
+    /* background-color: #E63946; */
   }
   
   .dados {

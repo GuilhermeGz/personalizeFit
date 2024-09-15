@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
 import { useNavigate } from "react-router-dom";
+import { FaDumbbell } from 'react-icons/fa';
+import { jwtDecode } from "jwt-decode";
+import UserImage from "../../../img/user.jpg"
+
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -9,15 +13,17 @@ const Signup = () => {
         username: '',
         email: '',
         password: '',
-        // confirmPassword: '',
-        // userType: ''
+        userType: ''
     });
+
+    const [file, setFile] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        console.log('Form data:', formData);
+
         try {
-            const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register', {
+            const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register-trainer', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -27,7 +33,10 @@ const Signup = () => {
 
             if (response.ok) {
                 console.log('Cadastro realizado com sucesso!');
-                navigate('/');
+                const exerciseId = await response.text();
+                if(file){
+                    uploadFile(exerciseId, formData);
+                }
             } else {
                 console.error('Erro ao cadastrar:', response.statusText);
             }
@@ -36,13 +45,130 @@ const Signup = () => {
         }
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+    const loginResponse = async (login,password) => {
+
+        const userData ={
+            email: login,
+            password: password
+        }
+        try {
+            const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+    
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                return await response.json();
+            } else {
+                return await response.text();
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            throw error; // Propagar o erro
+        }
+    };
+
+    const uploadFile = async (exerciseId, dadosForm) => {
+        const formData = new FormData();
+        formData.append('Name', "Teste");
+        formData.append('FileData', file);
+        console.log("Registro de imagem");
+        console.log(exerciseId);
+        console.log(dadosForm);
+        
+        const token = await loginResponse(dadosForm.username, dadosForm.password)
+        const data = JSON.parse(token); 
+        const decoded = jwtDecode(data.access_token);
+        console.log(decoded);
+        
+        
+
+        try {
+            const fileResponse = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${data.access_token}`
+                },
+                body: formData
+            });
+
+            if (fileResponse.ok) {
+                const fileData = await fileResponse.json();
+                console.log("Dados indo pra associar");
+                console.log(exerciseId);
+                console.log(fileData);
+                console.log(data.access_token);
+                
+                
+                
+                associateFileWithExercise(exerciseId, fileData, data.access_token);
+            } else {
+                console.error('Erro ao enviar o arquivo:', fileResponse.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao realizar a solicitação de upload:', error);
+        }
     }
+
+    const  associateFileWithExercise = async (exerciseId, fileId, token) => {
+        const exerciseFile = {
+            userId: exerciseId, 
+            fileId: fileId,
+            fileType: "string"
+        };
+
+        try {
+            const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/UserHasFile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Substitua por um token real
+                },
+                body: JSON.stringify(exerciseFile)
+            });
+
+            if (response.ok) {
+                console.log("Associação do arquivo ao usuário criada com sucesso");
+                navigate('/');
+            } else {
+                console.error('Erro ao associar o arquivo ao usuário:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro na solicitação POST:', error);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === "file") {
+            setFile(files[0]);
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+    }
+
+    
+    const handleIconClick = () => {
+        document.getElementById('fileInput').click();
+    };
+
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
+    const renderIconOrImage = () => {
+        if (file) {
+          return <img src={URL.createObjectURL(file)} alt="Selected" className='uploaded-image' />;
+        }
+        return <img src={UserImage} alt="Treinador" className="student-avatar"/>
+    };
 
     return (
         <div className='main'>
@@ -51,33 +177,76 @@ const Signup = () => {
                 <h1>PERSONALIZE FIT</h1>
             </div>
             <h3 className='titleSignup'>Criar Conta</h3>
+            
+            <div className="cardContainer">
+
+        <div className="bntAccountContainer" onClick={handleIconClick}>
+                {renderIconOrImage()}
+            </div>
+        </div>
+
+        <input
+            type="file"
+            id="fileInput"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+        />
+
             <form onSubmit={handleSubmit}>
-                <label htmlFor="">
+                <label htmlFor="username">
                     <p>Nome:</p>
-                    <input type="text" className='dados-cadastro' name="username" value={formData.username} onChange={handleChange} />
+                    <input 
+                        type="text" 
+                        className='dados-cadastro' 
+                        name="username" 
+                        value={formData.username} 
+                        onChange={handleChange} 
+                    />
                 </label>
-                <label htmlFor="">
+                <label htmlFor="email">
                     <p>E-mail:</p>
-                    <input type="email" className='dados-cadastro' name="email" value={formData.email} onChange={handleChange} />
+                    <input 
+                        type="email" 
+                        className='dados-cadastro' 
+                        name="email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                    />
                 </label>
-                <label htmlFor="">
+                <label htmlFor="password">
                     <p>Senha:</p>
-                    <input type="password" className='dados-cadastro' name="password" value={formData.password} onChange={handleChange} />
-                </label>
-                <label htmlFor="">
-                    <p>Confirmar senha:</p>
-                    <input type="password" className='dados-cadastro' name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+                    <input 
+                        type="password" 
+                        className='dados-cadastro' 
+                        name="password" 
+                        value={formData.password} 
+                        onChange={handleChange} 
+                    />
                 </label>
 
                 <p className='titleCadastro'>Tipo de Cadastro</p>
 
                 <div className='tipo-perfil'>
-                    <label htmlFor="">
-                        <input type="radio" name="userType" id="personal" value="Personal" className='teste' onChange={handleChange} />
+                    <label htmlFor="personal">
+                        <input 
+                            type="radio" 
+                            name="userType" 
+                            id="personal" 
+                            value="Personal" 
+                            className='teste' 
+                            onChange={handleChange} 
+                        />
                         <p>Personal</p>
                     </label>
-                    <label htmlFor="">
-                        <input type="radio" name="userType" id="aluno" value="Aluno" className='teste' onChange={handleChange} />
+                    <label htmlFor="aluno">
+                        <input 
+                            type="radio" 
+                            name="userType" 
+                            id="aluno" 
+                            value="Aluno" 
+                            className='teste' 
+                            onChange={handleChange} 
+                        />
                         <p>Aluno</p>
                     </label>
                 </div>
@@ -86,6 +255,16 @@ const Signup = () => {
                     <button type="submit">Criar Conta</button>
                 </div>
             </form>
+
+            {/* Campo de upload de arquivo fora do form */}
+            {/* <label htmlFor="file">
+                <p>Selecione um arquivo:</p>
+                <input 
+                    type="file" 
+                    name="file" 
+                    onChange={handleChange} 
+                />
+            </label> */}
         </div>
     )
 }
