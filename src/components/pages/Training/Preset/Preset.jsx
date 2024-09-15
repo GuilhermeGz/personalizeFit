@@ -17,7 +17,7 @@ const Preset = () => {
     const response = await fetch(
       "http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingPreset",{
         headers: {
-           'Authorization': `Bearer ${userData.access_token}`
+           'Authorization': `Bearer ${token}`
         }
       }
     );
@@ -54,7 +54,7 @@ const Preset = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${userData.access_token}`
+            'Authorization': `Bearer ${token}`
           
           },
         }

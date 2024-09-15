@@ -7,6 +7,7 @@ const ProtectedRoute = ({ element, ...rest }) => {
   const [authStatus, setAuthStatus] = useState('checking'); // 'checking', 'authenticated', 'unauthenticated'
   const [userData, setUserData] = useState(location.state && location.state.userData);
   const [timer, setTimer] = useState(0);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     setAuthStatus('authenticated');
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ element, ...rest }) => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${userData.access_token}`
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ refreshToken: userData.refresh_token }),
           });

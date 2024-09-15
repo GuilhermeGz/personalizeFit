@@ -24,7 +24,7 @@ const List = () => {
         const response = await fetch(
           "http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise", {
             headers: {
-                 'Authorization': `Bearer ${userData.access_token}`
+                 'Authorization': `Bearer ${token}`
             }
           }
         );

@@ -20,7 +20,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    const decoded = jwtDecode(userData.access_token);     
+    const decoded = jwtDecode(token);     
     const userSessionId = decoded.sub; 
     setUserSessionName(decoded.preferred_username)
     console.log(decoded.preferred_username);
@@ -32,7 +32,7 @@ const Home = () => {
     try {
       const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/user/api/UserHasFile/?userId=${userSessionId}`, {
         headers: {
-          'Authorization': `Bearer ${userData.access_token}`
+          'Authorization': `Bearer ${token}`
         }
       });
       const fileData = await imageResponse.json();
@@ -47,7 +47,7 @@ const Home = () => {
       if (fileId) {
         const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/file/api/file/${fileId}`, {
           headers: {
-            'Authorization': `Bearer ${userData.access_token}`
+            'Authorization': `Bearer ${token}`
           }
         });
         const imageFileData = await imageResponse.json();
@@ -87,7 +87,7 @@ const Home = () => {
       try {
         const response = await fetch("http://gaetec-server.tailf2d209.ts.net:8000/training/api/StudentHasPresets", {
           headers: {
-            'Authorization': `Bearer ${userData.access_token}`
+            'Authorization': `Bearer ${token}`
           }
         });
         const data = await response.json();

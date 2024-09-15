@@ -24,7 +24,7 @@ const Create = () => {
             try {
                 const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/MuscularGroup', {
                     headers: {
-                        'Authorization': `Bearer ${userData.access_token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
                 const data = await response.json();
@@ -42,7 +42,7 @@ const Create = () => {
             try {
                 const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise', {
                     headers: {
-                        'Authorization': `Bearer ${userData.access_token}`
+                        'Authorization': `Bearer ${token}`
                     }
                 });
                 const data = await response.json();
@@ -79,7 +79,7 @@ const Create = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userData.access_token}` 
+                'Authorization': `Bearer ${token}` 
             },
             body: JSON.stringify(exerciseData)
         })
@@ -105,7 +105,7 @@ const Create = () => {
                 return fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${userData.access_token}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: formData
                 }).then(response => response.json())
@@ -118,7 +118,7 @@ const Create = () => {
                 return fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File/url', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${userData.access_token}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: formData
                 }).then(response => response.json())
@@ -143,7 +143,7 @@ const Create = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${userData.access_token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(exerciseFile)
             });

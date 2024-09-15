@@ -20,7 +20,7 @@ const Association = () => {
     fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/trainer-management/trainerHasStudents', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${userData.access_token}`
+        'Authorization': `Bearer ${token}`
       }
     })
     .then(response => response.json())
@@ -78,7 +78,7 @@ const Association = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${userData.access_token}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(data),
     })

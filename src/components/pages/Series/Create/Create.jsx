@@ -89,7 +89,7 @@ const Create = () => {
           const response = await fetch(
             `http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${exerciseId}`, {
               headers: {
-               'Authorization': `Bearer ${userData.access_token}`
+               'Authorization': `Bearer ${token}`
               }
             }
           );

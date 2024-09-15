@@ -11,6 +11,8 @@ const List = () => {
     const location = useLocation();
     const userData = location.state && location.state.userData;
     const trainingPreset = location.state && location.state.trainingPreset;
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
 
     useEffect(() => {
         console.log("Dados do Usuário");
@@ -19,7 +21,7 @@ const List = () => {
         const fetchTrainingPresetList = async () => {
             const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup', {
                 headers: {
-                    'Authorization': `Bearer ${userData.access_token}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             const data = await response.json();
@@ -59,7 +61,7 @@ const List = () => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${userData.access_token}`
+                    'Authorization': `Bearer ${token}`
                     
                 }
             });

@@ -36,7 +36,7 @@ const Create = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${userData.access_token}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(aux),
     })

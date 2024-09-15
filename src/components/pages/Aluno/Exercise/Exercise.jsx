@@ -33,7 +33,7 @@ const Exercise = () => {
       try {
         const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/ExerciseHasFile/1`, {
           headers: {
-            'Authorization': `Bearer ${userData.access_token}`
+            'Authorization': `Bearer ${token}`
           }
         });
         const data = await response.json();
@@ -42,7 +42,7 @@ const Exercise = () => {
         if (fileId) {
           const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/file/api/file/${fileId}`, {
             headers: {
-              'Authorization': `Bearer ${userData.access_token}`
+              'Authorization': `Bearer ${token}`
             }
           });
           const fileData = await imageResponse.json();
@@ -66,7 +66,7 @@ const Exercise = () => {
     };
 
     fetchImageData();
-  }, [userData.access_token]);
+  }, [token]);
 
   const fetchExerciseName = async (id) => {
     const name = await getNameExercise(id);
@@ -95,7 +95,7 @@ const Exercise = () => {
     try {
       const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${id}`, {
         headers: {
-          'Authorization': `Bearer ${userData.access_token}`
+          'Authorization': `Bearer ${token}`
         }
       });
 

@@ -19,7 +19,7 @@ const Update = () => {
         try {
             const response = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise/${exerciseId}`, {
               headers: {
-                'Authorization': `Bearer ${userData.access_token}`
+                'Authorization': `Bearer ${token}`
               }
             });
             const data = await response.json();
@@ -56,7 +56,7 @@ const Update = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${userData.access_token}`
+            'Authorization': `Bearer ${token}`
       
           },
           body: JSON.stringify(resp),
