@@ -3,6 +3,7 @@ import { FaDumbbell } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Equivalent.css";
 import CardWhite from "../../Cards/Divisao/CardWhite";
+import Navbar from "../../../../Navbar";
 
 const Equivalent = () => {
   const navigate = useNavigate();
@@ -60,7 +61,6 @@ const Equivalent = () => {
       }
 
       const data = await response.json();
-      console.log(data);
 
       setEquivalentExercises(prevExercises => {
         return prevExercises.map(exercise => {
@@ -79,6 +79,8 @@ const Equivalent = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div className="trainer-info">
         <div className="trainer-profile">
@@ -109,6 +111,8 @@ const Equivalent = () => {
         ))}
       </div>
     </div>
+    </>
+
   );
 };
 

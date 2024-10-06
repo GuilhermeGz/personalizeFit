@@ -5,6 +5,7 @@ import "./Training.css";
 import CardDivAtual from "../../Cards/Divisao/CardDivAtual";
 import CardWhite from "../../Cards/Divisao/CardWhite";
 import CardDivActive from "../../Cards/Divisao/CardDivActive"
+import Navbar from "../../../../Navbar";
 
 const Training = () => {
   const navigate = useNavigate();
@@ -57,7 +58,6 @@ const Training = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       return data.name;
 
     } catch (error) {
@@ -67,13 +67,14 @@ const Training = () => {
   };
 
   const ClickExercise = (exercises) => {
-    console.log("Ta enviando isso aqui");
-    console.log(exercises);
+
     navigate(`/Aluno/Exercise`, {state: { userData: userData, exercises: exercises}});
 
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div className="trainer-info">
         <div className="trainer-profile">
@@ -119,6 +120,8 @@ const Training = () => {
         ))}
       </div>
     </div>
+    </>
+
   );
 };
 

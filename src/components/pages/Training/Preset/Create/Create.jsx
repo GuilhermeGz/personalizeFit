@@ -3,6 +3,7 @@ import "./style.css";
 import { FaPlus, FaDumbbell, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../../Navbar";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -65,6 +66,8 @@ const Create = () => {
   },[]);
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div>
         <div className="title">
@@ -101,6 +104,8 @@ const Create = () => {
         </div>
       </div>
     </div>
+    </>
+
   );
 };
 

@@ -6,6 +6,7 @@ import CardWhite2 from "../../Cards/Divisao/CardWhite2";
 import ReactPlayer from 'react-player';
 import CustomIcon from './CustomIcon';
 import CustomIcon2 from './CustomIcon2';
+import Navbar from "../../../../Navbar";
 
 const Exercise = () => {
   const navigate = useNavigate();
@@ -47,17 +48,13 @@ const Exercise = () => {
           });
           const fileData = await imageResponse.json();
 
-          console.log(fileData);
-
           if (fileData.extension === 'jpg') {
-            console.log("setou não");
             const { fileBytes } = fileData;
             const imageObjectURL = `data:image/${fileData.extension};base64,${fileBytes}`;
             setImageUrl(imageObjectURL);
           } else if (fileData.extension === 'url') {
             setVideoUrl(fileData.path);
-            console.log("setou");
-            console.log(videoUrl);
+           
           }
         }
       } catch (error) {
@@ -119,6 +116,8 @@ const Exercise = () => {
   const parsedTrainingSets = JSON.parse(currentExercise.trainingSetJsonString);
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div className="trainer-info">
         <div className="trainer-profile">
@@ -218,6 +217,8 @@ const Exercise = () => {
         </CardWhite2>
       </div>
     </div>
+    </>
+
   );
 };
 

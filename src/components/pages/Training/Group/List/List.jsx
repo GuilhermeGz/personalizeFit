@@ -3,6 +3,7 @@ import { FaDumbbell, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../../Navbar";
 
 const List = () => {
     const [trainingPresetList, setTrainingPresetList] = useState([]);
@@ -15,9 +16,6 @@ const List = () => {
 
 
     useEffect(() => {
-        console.log("Dados do Usuário");
-        console.log(userData);
-        console.log(location.state.trainingPreset);
         const fetchTrainingPresetList = async () => {
             const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup', {
                 headers: {
@@ -37,13 +35,11 @@ const List = () => {
     );
 
     const handleButtonClick = () => {
-        console.log("Criação do treino");
         navigate(`/Training/Create`, {state: {update: location.state.trainingPreset.id, userData: userData} });
     }
 
     const handleButtonClick2 = (trainingGroup) => {
-        console.log(trainingGroup);
-        console.log("Vai atualizar");
+
         navigate(`/Training/Update`, { state: { trainingGroup, userData: userData}});
     }
 
@@ -82,6 +78,8 @@ const List = () => {
     };
 
     return (
+        <>
+    <Navbar/>
         <div className='main'>
             <div>
                 <div className='title'>
@@ -135,6 +133,8 @@ const List = () => {
                 </div>
             </div>
         </div>
+        </>
+
     );
 }
 

@@ -120,3 +120,35 @@ body {
     border-radius: 3px;
     background: #FFFFFF;
 }
+
+
+.forgot-btn {
+    width: 60%;
+    padding: 10px;
+    background-color: #E63946;
+    color: #E1E1E6;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+  }
+
+  .forgot-btn:hover {
+    background-color: #ca323f;
+  }
+
+  .forgot-form {
+    width: 50%;
+    padding: 40px;
+    align-self: center;
+
+  }
+
+  .forgot-text{
+    color: #E1E1E6;
+    font-size: 30px;
+  }

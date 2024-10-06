@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { FaDumbbell, FaPlus } from 'react-icons/fa';
 import "./style.css";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Create = () => {
     const [exerciseName, setExerciseName] = useState('');
@@ -73,7 +74,6 @@ const Create = () => {
             trainerId: "1"
         };
 
-        console.log(exerciseData);
     
         fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise', {
             method: 'POST',
@@ -93,7 +93,6 @@ const Create = () => {
         })
         .then(data => {
             clearFields();
-            console.log("Exercício criado com sucesso");
             
             const exerciseId = 1; // Assumindo que o ID do exercício criado é retornado aqui
 
@@ -126,18 +125,12 @@ const Create = () => {
             }
         })
         .then(({ exerciseId, fileId }) => {
-            console.log(exerciseId);
-            console.log(fileId);
-            
-
+ 
             const exerciseFile = {
                 exerciseId: 39, // Substitua pelo ID real do exercício
                 fileId: fileId,
                 fileType: "string",
-            };
-            
-        console.log(exerciseFile);
-        
+            };        
 
             return fetch('http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/ExerciseHasFile', {
                 method: 'POST',
@@ -160,6 +153,8 @@ const Create = () => {
     };
 
     return (
+        <>
+    <Navbar/>
         <div className='main'>
             <div className='title'>
                 <h1>Solicitação de Exercício</h1>
@@ -289,6 +284,8 @@ const Create = () => {
                 </div>
             </div>
         </div>
+        </>
+
     );
 }
 

@@ -88,6 +88,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-family: sans-serif;
 
 }
 
@@ -105,6 +106,8 @@
     font-size: 16px;
     transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
+    font-family: sans-serif !important;
+
 }
 
 .tipo-perfil label {
@@ -115,9 +118,20 @@
 }
 
 .titleCadastro {
-    margin-top: 25px;
+    font-family: sans-serif;
 }
 
 .titleSignup {
     margin-top: 10px;
+}
+
+.link-login{
+    text-decoration: underline;
+    padding-left: 5px;
+    color: white;
+}
+
+.login-text{
+    margin-top: 10px;
+    display: inline-flex;
 }

@@ -3,6 +3,7 @@ import { FaDumbbell } from 'react-icons/fa';
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 
 const List = () => {
@@ -17,9 +18,7 @@ const List = () => {
 
 
     useEffect(() => {
-      console.log("Aquiii");
-      console.log(tipo);
-      console.log(trainingAux);
+
       const fetchExerciseList = async () => {
         const response = await fetch(
           "http://gaetec-server.tailf2d209.ts.net:8000/exercise/api/Exercise", {
@@ -48,6 +47,8 @@ const List = () => {
     };
 
     return (
+        <>
+    <Navbar/>
         <div className='main'>
             <div>
                 <div className='title'>
@@ -84,6 +85,8 @@ const List = () => {
 
             </div>
         </div>
+        </>
+
     );
 }
 

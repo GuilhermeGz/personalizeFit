@@ -3,6 +3,7 @@ import { FaDumbbell, FaTimes, FaPlus, FaPhone, FaEnvelope } from "react-icons/fa
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Association = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -51,6 +52,8 @@ const Association = () => {
 
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div>
         <div className="title">
@@ -90,6 +93,8 @@ const Association = () => {
         </div>
       </div>
     </div>
+    </>
+
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './style.css'; 
 import { FaDumbbell } from 'react-icons/fa';
 import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Create = () => {
   const [file, setFile] = useState(null);
@@ -30,9 +31,7 @@ const Create = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
-    console.log('Form submitted:', formData);
-    console.log('Checkbox checked:', isChecked); 
-       
+    
     try {
         const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register-student', {
             method: 'POST',
@@ -44,18 +43,11 @@ const Create = () => {
         });
 
         if (response.ok) {
-            console.log('Dados enviados com sucesso!');
             const exerciseId = await response.text(); // Obtém a resposta como texto
-
-            console.log(exerciseId);
-
             const formData = new FormData();
             formData.append('Name', "Teste");
             formData.append('FileData', file);
-
-            console.log(formData);
-            console.log("Cria arquivo");
-            
+               
             const fileResponse = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File', {
                 method: 'POST',
                 headers: {
@@ -66,8 +58,6 @@ const Create = () => {
 
             if (fileResponse.ok) {
                 const fileData = await fileResponse.json();
-                console.log("Vai relacionar");
-                console.log(fileData);
                 
                 associateFileWithExercise(exerciseId, fileData);
             } else {
@@ -125,6 +115,8 @@ const Create = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className='main'>
       <div className='title'>
         <h1>Dados do Usuário</h1>
@@ -203,6 +195,8 @@ const Create = () => {
         </div>
       </form>
     </div>
+    </>
+
   );
 };
 

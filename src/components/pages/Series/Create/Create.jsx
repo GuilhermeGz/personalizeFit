@@ -3,6 +3,7 @@ import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Create = () => {
     const [series, setSeries] = useState([]);
@@ -59,12 +60,8 @@ const Create = () => {
     };
 
     useEffect(() => {
-      console.log(tipo);
 
-      console.log("Update 1");
       if (requestProcessed) {
-        console.log("ta entrando aqui");
-        console.log("Novo trainingAux:", trainingAux);
 
         if (tipo == "create") {
           navigate(`/Training/Create`, {
@@ -79,11 +76,8 @@ const Create = () => {
     }, [requestProcessed]);
 
     useEffect(() => {
-      console.log("Update 2");
-      console.log(exerciseId);
-      console.log(trainingAux);
+
       const fetchExerciseName = async () => {
-        console.log("ta entrando aqui222");
 
         try {
           const response = await fetch(
@@ -108,6 +102,8 @@ const Create = () => {
 
 
     return (
+      <>
+    <Navbar/>
         <div className='main'>
             <div className='title'>
                 <h1>Definição de Séries</h1>
@@ -181,6 +177,8 @@ const Create = () => {
 
             </div>
         </div>
+        </>
+
     );
 }
 

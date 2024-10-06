@@ -3,6 +3,7 @@ import { FaDumbbell, FaTimes, FaPlus, FaPhone, FaEnvelope, FaEye  } from "react-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Association = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -15,8 +16,6 @@ const Association = () => {
 
   useEffect(() => {
 
-    console.log("no effect");
-    console.log(trainingPreset);
     fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/trainer-management/trainerHasStudents', {
       method: 'GET',
       headers: {
@@ -25,16 +24,13 @@ const Association = () => {
     })
     .then(response => response.json())
     .then(data => {
-      console.log("Retorno da Solicitação:");
-      console.log(data);
+
       setAssociatedStudents(data);
     })
     .catch(error => {
       console.error('Erro na solicitação GET:', error);
       navigate('/');
     });
-
-    console.log(associatedStudents);
 
   }, [trainingPreset]);
 
@@ -100,6 +96,8 @@ const Association = () => {
 
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div>
         <div className="title">
@@ -141,6 +139,8 @@ const Association = () => {
         </div>
       </div>
     </div>
+    </>
+
   );
 };
 

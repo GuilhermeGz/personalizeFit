@@ -3,6 +3,7 @@ import "./style.css";
 import { FaPlus, FaDumbbell, FaTimes } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Update = () => {
     const navigate = useNavigate();
@@ -45,11 +46,6 @@ const Update = () => {
         trainingGroupHasExercises: trainingAux.trainingGroupHasExercises,
       };
 
-      console.log(trainingAux);
-      console.log(trainingAux.trainingGroupHasExercises);
-      console.log(resp);
-      console.log("Deveria atualizar");
-
       fetch(
         `http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup/${trainingAux.id}`,
         {
@@ -85,9 +81,7 @@ const Update = () => {
     };
 
     useEffect(() => {
-      console.log("Teste de info");
-      console.log(exerciseUp);
-      console.log(trainingAux);
+
       if (trainingAux.trainingGroupHasExercises.length > 0 && exerciseUp) {
         const updatedExercises = trainingAux.trainingGroupHasExercises.map(
           (item) => {
@@ -105,7 +99,6 @@ const Update = () => {
     }, [exerciseUp]);
 
     useEffect(() => {
-      console.log("erro aqui");
       if (trainingAux.trainingGroupHasExercises.length > 0) {
         const fetchExercises = async () => {
           const updatedExercises = [];
@@ -127,12 +120,11 @@ const Update = () => {
         }));
 
         setExercises(updatedExercises);
-
-
-        console.log(trainingAux);
     }
 
     return (
+      <>
+    <Navbar/>
         <div className='main'>
             <div>
                 <div className='title'>
@@ -183,6 +175,8 @@ const Update = () => {
 
             </div>
         </div>
+        </>
+
     );
 }
 

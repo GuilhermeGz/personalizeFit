@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./style.css";
 import UserImage from "../../../../img/user.jpg"
 import { jwtDecode } from "jwt-decode";
+import Navbar from "../../../../Navbar";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -18,14 +19,10 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log("Token do aplica");
-    console.log(token);
     
     const decoded = jwtDecode(token);     
     const userSessionId = decoded.sub; 
     setUserSessionName(decoded.name || decoded.preferred_username)
-    console.log(userSessionId);
-    console.log("sid acima");
 
     const fetchData = async () => {
     try {
@@ -41,8 +38,6 @@ const Home = () => {
         fileId = fileData[0].fileId;
       }            
       
-      console.log(fileId);
-      console.log("sid acima2");
       if (fileId) {
         const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/file/api/file/${fileId}`, {
           headers: {
@@ -68,7 +63,6 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log(userData);
 
     const fetchData = async () => {
       try {
@@ -83,7 +77,6 @@ const Home = () => {
 
         const imageUrls = {};
         for (const student of data) {
-          console.log(student.id);
           
           try {
             const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/user/api/UserHasFile/?userId=${student.id}`, {
@@ -152,6 +145,9 @@ const Home = () => {
   };
 
   return (
+    <>
+    <Navbar/>
+
     <div className="main">
       <div className="trainer-info">
         <div className="trainer-profile">
@@ -198,6 +194,7 @@ const Home = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

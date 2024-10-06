@@ -4,6 +4,7 @@ import "./style.css";
 import Logo from '../../../img/Anderson.png'
 import { jwtDecode } from "jwt-decode";
 import UploadVideo from '../../../UploadVideo';
+import InitScreen from "../../Assets/Init/Init"
 
 const Login = () => {
 
@@ -38,21 +39,16 @@ const Login = () => {
 
             data = JSON.parse(data); 
             const decoded = jwtDecode(data.access_token);
-            console.log("Teste de token");
-            console.log(decoded);
             localStorage.setItem('token', data.access_token);
 
 
             if (decoded.realm_roles.includes("trainer-role")) {
-                console.log("entrou aqui");
                 navigate('/Trainer/Home', {state: { userData: data}});
 
             } else if (decoded.realm_roles.includes("student-role")) {
                 navigate('/Aluno/Home', {state: { userData: data}});
 
             }else{
-                console.log("entrou aqui2");
-
                navigate('/Exercise/Create', {state: { userData: data}});
 
             }
@@ -70,46 +66,49 @@ const Login = () => {
 
   return (
     <div className='main'>
-        
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div className='logo'>
-                    <img src={Logo} alt="Imagem de um gostoso na academia" />
-                    <h1>PERSONALIZE FIT</h1>
-                </div>
-                <label htmlFor="">
-                    <p>E-mail / Telefone:</p>
+        <InitScreen>
+            <div className='login-form'>
+
+                <h2>Acesse sua conta</h2>
+
+                <form>
+                    <label>
                     <input
-                        type="text"
-                        className='inputLogin'
-                        placeholder='E-mail ou Telefone'
+                        type="email"
+                        className='input-login'
+                        placeholder='E-mail'
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
-                        />
-                </label>
-                <label htmlFor="">
-                    <p>Senha:</p>
-                    <input 
+                    />
+                    </label>
+                    <label>
+                    <input
                         type="password"
-                        className='inputLogin'
+                        className='input-login'
                         placeholder='Senha'
                         value={userPassword}
-                        onChange={(e) => setUserPassword(e.target.value)}    
-                        />
-                </label>
-                <br />
-                <div className='btns'>
-                    <button type='submit'>Entrar</button>
-                </div>
-            </form>
-            
-            <div className='links'> 
-                <Link to="/signup" className="linkEsquerda">Cadastrar-se</Link>
-                <Link to="/forgot" className="linkDireita">Recuperar senha</Link>
-            </div>
+                        onChange={(e) => setUserPassword(e.target.value)}
+                    />
+                    </label>
 
-            {/* <UploadVideo /> */}
-        </div>
+                    <Link to="/forgot-password" className='forgot-password'>
+                    Esqueceu sua senha?
+                    </Link>
+
+                    <button type='submit' className='login-btn' onClick={handleSubmit}> 
+                    Entrar
+                    </button>
+
+                    <div className='create-account'>
+                        <p className='create-account-text'>Ainda não tem acesso?</p>
+                        <Link to="/signup" className='create-account-btn'>
+                            Criar conta
+                        </Link>
+                    </div>
+
+                </form>
+            </div>
+        </InitScreen>
     </div>
 
   )

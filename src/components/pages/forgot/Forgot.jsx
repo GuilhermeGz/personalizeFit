@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./style.css";
 import Logo from '../../../img/Anderson.png'
+import InitScreen from "../../Assets/Init/Init"
+
 
 const Forgot = () => {
     const navigate = useNavigate();
@@ -9,7 +11,6 @@ const Forgot = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email);
         // try {
         //     const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/sua-rota-de-api', {
         //         method: 'POST',
@@ -35,24 +36,23 @@ const Forgot = () => {
 
     return (
         <div className='main'>
-            <div>
+            <InitScreen> 
+
+            <div className='forgot-form'>
                 <form onSubmit={handleSubmit}>
-                    <div className='logo'>
-                        <img src={Logo} alt="Imagem de um gostoso na academia" />
-                        <h1>PERSONALIZE FIT</h1>
-                    </div>
                     <label htmlFor="">
-                        <p>Informe seu e-mail</p>
+                        <p className='forgot-text'>Informe seu E-mail</p>
                         <br />
-                        <input type="text" className='inputLogin' placeholder='E-mail' value={email} onChange={handleChange} />
+                        <input type="text" className='input-login' placeholder='E-mail' value={email} onChange={handleChange} />
                     </label>
                 
-                    <br />
-                    <div className='btnss'>
-                        <button type='submit'>Enviar</button>
+                    <div className='create-account'>
+                        <button type='submit' className='forgot-btn'>Enviar</button>
                     </div>
                 </form>
             </div>
+
+            </InitScreen>
         </div>
     )
 }

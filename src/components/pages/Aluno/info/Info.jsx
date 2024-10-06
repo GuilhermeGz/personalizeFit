@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import { FaDumbbell } from 'react-icons/fa';
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Info = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +21,6 @@ const Info = () => {
 
 
   useEffect(() => {
-    console.log(userData);
-    console.log(studentInfo);
     
     setFormData({
       name: studentInfo.username,
@@ -45,9 +44,6 @@ const Info = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted:', formData);
-    console.log('Checkbox checked:', isChecked);
-
     /*
     try {
       const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/teste', {
@@ -73,6 +69,8 @@ const Info = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div className="title">
         <h1>Dados do Usuário</h1>
@@ -158,6 +156,8 @@ const Info = () => {
         </div>
       </form>
     </div>
+    </>
+
   );
 };
 

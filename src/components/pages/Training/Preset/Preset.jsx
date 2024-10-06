@@ -3,6 +3,7 @@ import { FaDumbbell, FaTimes, FaPlus } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Preset = () => {
   const [trainingPresetList, setTrainingPresetList] = useState([]);
@@ -26,8 +27,6 @@ const Preset = () => {
   };
 
   useEffect(() => {
-    console.log("Dados do Usuário");
-    console.log(userData);
     const fetchTrainingPresetListExec = async () => {
       function sleep(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -71,18 +70,18 @@ const Preset = () => {
   };
 
   const handleButtonClick2 = (trainingPreset) => {
-    console.log("foi aqui");
     navigate(`/Training/Group/List`, {
       state: { trainingPreset: trainingPreset , userData: userData},
     });
   };
 
   const handleButtonClick3 = () => {
-    console.log("foi aqui");
     navigate(`/Trainer/Home`, { state: { userData: userData},});
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div>
         <div className="title">
@@ -143,6 +142,8 @@ const Preset = () => {
 
       </div>
     </div>
+    </>
+
   );
 };
 

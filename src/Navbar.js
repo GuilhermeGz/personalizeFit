@@ -1,11 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import LogoutIcon from "./components/Assets/logout/logoutIcon";
 
 const Navbar = () => {
+
+  
   return (
     <nav className="navbar">
-      <ul className="navbar-list">
+      <h3>PERSONALIZE FIT</h3>
+      <LogoutIcon></LogoutIcon>
+      {/* <ul className="navbar-list">
         <li className="navbar-item"><Link to="/">Login</Link></li>
         <li className="navbar-item"><Link to="/signup">Signup</Link></li>
         <li className="navbar-item"><Link to="/forgot">Recuperar Senha</Link></li>
@@ -20,7 +25,7 @@ const Navbar = () => {
         <li className="navbar-item"><Link to="/Aluno/Home">Home Aluno</Link></li>
 
 
-      </ul>
+      </ul> */}
     </nav>
   );
 }

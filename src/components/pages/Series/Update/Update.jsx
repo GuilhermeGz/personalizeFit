@@ -3,6 +3,7 @@ import "./style.css";
 import { FaDumbbell, FaTrash, FaPlus } from 'react-icons/fa';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Update = () => {
     const location = useLocation();
@@ -56,8 +57,6 @@ const Update = () => {
     
     useEffect(() => {
         if (requestProcessed) {
-            console.log("Novo trainingAux:", exerciseAux);
-            console.log(location.state.trainingAux);
             navigate(`/Training/Update`, { state: { exerciseAux: exerciseAux, trainingGroup: location.state.trainingAux, userData: userData } });
         }
     }, [requestProcessed]);
@@ -68,10 +67,11 @@ const Update = () => {
     useEffect(() => {
         const trainingSet = JSON.parse(exerciseAux.trainingSetJsonString);
         setSeries(trainingSet); 
-        console.log(exerciseAux);
     }, []);
 
     return (
+        <>
+    <Navbar/>
         <div className='main'>
             <div className='title'>
                 <h1>Definição de Séries</h1>
@@ -145,6 +145,8 @@ const Update = () => {
 
             </div>
         </div>
+        </>
+
     );
 }
 

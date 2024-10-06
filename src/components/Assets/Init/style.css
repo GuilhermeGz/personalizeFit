@@ -1,0 +1,127 @@
+/* Estrutura principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* background: linear-gradient(to right, #2c3e50, #3498db); */
+  }
+  
+  .login-card {
+    display: flex;
+    width: 833px;
+    height: 550px;
+    background-color: rgba(255, 255, 255, 0.15); /* Cor de fundo com 15% de opacidade */
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  
+  .login-form {
+    width: 50%;
+    padding: 40px;
+  }
+  
+  .login-form h2 {
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: 28px !important;
+    color: #E1E1E6;
+    margin-bottom: 28px;
+  }
+  
+  .input-login {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 28px;
+    border: 1px solid #ccc;
+    border-radius: 5px !important;
+    font-size: 16px;
+    font-family: sans-serif;
+
+  }
+  
+  .forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 28px;
+    font-size: 14px;
+    color: #E1E1E6;
+    text-decoration: none;
+    font-family: sans-serif;
+  }
+  
+  .login-btn {
+    width: 60%;
+    padding: 10px;
+    background-color: #1D3557;
+    color: #E1E1E6;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50px;
+    margin-top: 22px;
+    margin-bottom: 22px;
+  }
+  
+  .login-btn:hover {
+    background-color: #162d58;
+  }
+  
+  .create-account {
+    text-align: center;
+  }
+  
+  .create-account-text {
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+
+  .create-account-btn {
+    width: 60%;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #E63946;
+    color: #E1E1E6;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50px;
+  }
+  
+  .create-account-btn:hover {
+    background-color: #ca323f;
+  }
+  
+  /* Logo */
+  .login-logo {
+    width: 50%;
+    background-image: 
+      linear-gradient(152deg, rgba(29, 29, 42, 0.3) 33.19%, rgba(52, 96, 124, 0.8) 106.91%), /* Gradiente com 80% de opacidade */
+      url('../../../img/image.png'); /* Imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  
+  .login-logo img {
+    width: 300px;
+    margin-bottom: 10px;
+  }
+  
+  .login-logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

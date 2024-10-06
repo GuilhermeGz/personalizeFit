@@ -6,6 +6,8 @@ import "./style.css";
 import CardWhite from "../../Cards/Divisao/CardWhite";
 import { jwtDecode } from "jwt-decode";
 import UserImage from "../../../../img/user.jpg"
+import Navbar from "../../../../Navbar";
+
 // import jwt from 'jsonwebtoken'; // Importar jwt corretamente
 
 const Home = () => {
@@ -23,11 +25,7 @@ const Home = () => {
     const decoded = jwtDecode(token);     
     const userSessionId = decoded.sub; 
     setUserSessionName(decoded.preferred_username)
-    console.log(decoded.preferred_username);
     
-    console.log(userSessionId);
-    console.log("sid acima");
-
     const fetchData = async () => {
     try {
       const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/user/api/UserHasFile/?userId=${userSessionId}`, {
@@ -41,9 +39,7 @@ const Home = () => {
       if (Array.isArray(fileData) && fileData.length > 0) {
         fileId = fileData[0].fileId;
       }            
-      
-      console.log(fileId);
-      console.log("sid acima2");
+
       if (fileId) {
         const imageResponse = await fetch(`http://gaetec-server.tailf2d209.ts.net:8000/file/api/file/${fileId}`, {
           headers: {
@@ -91,18 +87,11 @@ const Home = () => {
           }
         });
         const data = await response.json();
-        console.log("info");
-        console.log(data[0]);
         setTrainingPresets(data[0]);
       } catch (error) {
         console.error('Erro ao buscar a lista de alunos associados:', error);
       }
     };
-
-    console.log("aqui");
-    console.log(trainingPresets);
-
-    console.log(trainingPresets.trainingPreset);
   
     fetchData();
   
@@ -139,6 +128,8 @@ const Home = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div className="trainer-info">
 
@@ -215,6 +206,7 @@ const Home = () => {
       
 
     </div>
+    </>
   );
 };
 

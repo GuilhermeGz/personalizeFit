@@ -3,6 +3,7 @@ import "./style.css";
 import { FaPlus, FaDumbbell, FaTimes } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Create = () => {
 
@@ -53,12 +54,8 @@ const Create = () => {
     };
 
     useEffect(() => {
-        console.log("Dados do Usuário");
-        console.log(userData);
  
         if (trainingAux.name != "TrainingAux") {
-            console.log("entrou");
-            console.log(trainingAux);
 
             fetch('http://gaetec-server.tailf2d209.ts.net:8000/training/api/TrainingGroup', {
                 method: 'POST',
@@ -90,8 +87,6 @@ const Create = () => {
     useEffect(() => {
         const initializeTrainingAux = () => {
             if (location.state && location.state.trainingAux1) {
-                console.log("trainingAux1 encontrado na localização:");
-                console.log(location.state.trainingAux1);
                 setTrainingAux(location.state.trainingAux1);
             } else {
                 console.log("Criando um novo trainingAux padrão...");
@@ -99,7 +94,6 @@ const Create = () => {
         };
     
         initializeTrainingAux();    
-        console.log(trainingAux);
     }, [location.state]);
 
     useEffect(() => {
@@ -126,13 +120,12 @@ const Create = () => {
 
         setExercises(updatedExercises);
 
-        console.log("Deletar");
-        console.log(trainingAux);
-        console.log(exercises);
     }
     
     
     return (
+        <>
+        <Navbar/>
         <div className='main'>
             <div>
                 <div className='title'>
@@ -183,6 +176,8 @@ const Create = () => {
 
             </div>
         </div>
+        </>
+
     );
 }
 

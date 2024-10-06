@@ -3,6 +3,7 @@ import { FaDumbbell, FaTimes, FaPlus } from "react-icons/fa";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Navbar from "../../../../Navbar";
 
 const Preset = () => {
   const navigate = useNavigate();
@@ -66,6 +67,8 @@ const Preset = () => {
   }, []);
 
   return (
+    <>
+    <Navbar/>
     <div className="main">
       <div>
         <div className="title">
@@ -105,6 +108,8 @@ const Preset = () => {
         </div>
       </div>
     </div>
+    </>
+
   );
 };
 
