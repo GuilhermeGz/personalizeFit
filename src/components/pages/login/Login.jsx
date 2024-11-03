@@ -10,6 +10,7 @@ const Login = () => {
 
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [error, setError] = useState(false);
 
     const navigate = useNavigate();
     const userData ={
@@ -56,6 +57,7 @@ const Login = () => {
 
         })
         .catch(error => {
+            setError(true)
             console.error('Erro na solicitação POST:', error);
         });
         
@@ -67,6 +69,13 @@ const Login = () => {
             <div className='login-form'>
 
                 <h2>Acesse sua conta</h2>
+                
+                {
+                error &&
+                    <div className="error">
+                        Login/Senha incorreto
+                    </div> 
+                }
 
                 <form>
                     <label>
