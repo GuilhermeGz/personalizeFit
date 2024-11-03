@@ -148,7 +148,7 @@ const Update = () => {
                     <div className="cardContainer" onClick={handleConcluirClick1}>
                         <div className="bntAccountContainer">
                             <FaPlus className='icon' />
-                            <p className="cardText">Adicionar Exercício</p>
+                            <p className="cardText addExerciseUpdate">Adicionar Exercício</p>
                         </div>
                     </div>
 

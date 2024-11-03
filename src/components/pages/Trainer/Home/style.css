@@ -103,7 +103,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px; /* Limite de largura do texto */
+  max-width: 250px;
 }
 
 

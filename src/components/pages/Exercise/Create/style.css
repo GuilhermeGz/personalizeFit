@@ -113,6 +113,11 @@
     color: #1D3557;
 }
 
+.addExerciseUpdate{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
 .linha {
     display: flex;
     flex-direction: row;
