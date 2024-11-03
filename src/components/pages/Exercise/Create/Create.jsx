@@ -157,7 +157,7 @@ const Create = () => {
     <Navbar/>
         <div className='main'>
             <div className='title'>
-                <h1>Solicitação de Exercício</h1>
+                <h1>Cadastro de Exercício</h1>
                 <div className='underline'></div>
             </div>
             <div className='serieContainer'>
@@ -215,11 +215,12 @@ const Create = () => {
                 <div className='text-input'>
                     <label>
                         <span className='labelTextArea'>Tipo de Envio:</span>
-                        <div>
+                        <div  className='radio-container'>
                             <label>
                                 <input
                                     type="radio"
                                     value="file"
+                                    className='create_exercise_radio'
                                     checked={inputType === 'file'}
                                     onChange={() => setInputType('file')}
                                 />
@@ -229,6 +230,7 @@ const Create = () => {
                                 <input
                                     type="radio"
                                     value="url"
+                                    className='create_exercise_radio'
                                     checked={inputType === 'url'}
                                     onChange={() => setInputType('url')}
                                 />

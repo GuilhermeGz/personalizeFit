@@ -8,6 +8,16 @@
 
 }
 
+.create_exercise_radio {
+    height: 20px !important;
+}
+
+.radio-container {
+    display: flex;
+    gap: 1rem;
+    place-self: center;
+}
+
 
 .exercicioLabel input {
     padding: 0px;
