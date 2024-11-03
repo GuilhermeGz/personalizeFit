@@ -166,10 +166,10 @@ const Home = () => {
             <FaPencilAlt className="icon iconTreino" />
             <span>Solicitar exercício</span>
           </button>
-          <button className="buttonTreino" onClick={handleConcluirClick3}>
+          {/* <button className="buttonTreino" onClick={handleConcluirClick3}>
             <FaEnvelope className="icon iconTreino" />
             <span>Nova postagem</span>
-          </button>
+          </button> */}
           <button className="buttonTreino" onClick={handleConcluirClick4}>
             <FaUser className="icon iconTreino" />
             <span>Adicionar Aluno</span>
