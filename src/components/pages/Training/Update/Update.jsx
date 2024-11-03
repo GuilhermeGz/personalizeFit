@@ -163,7 +163,7 @@ const Update = () => {
                     ))}
                 </div>
 
-                <div className='serie_btns'>
+                <div className='serie_btns serie_btns_position'>
                     <button type='submit' className="concluirButton cancelarButton" onClick={handleConcluirClick}>
                         Cancelar
                     </button>
