@@ -78,6 +78,10 @@ const Create = () => {
     }
   };
 
+  const handleButtonClick3 = () => {
+    navigate(`/Trainer/Home`);
+  };
+
   const associateFileWithExercise = async (exerciseId, fileId) => {
     const exerciseFile = {
         userId: exerciseId, 
@@ -195,10 +199,17 @@ const Create = () => {
             <label htmlFor="checkboxInput" className="fieldInput">Aluno ativo?</label>
         </div>
                 
-        <div className="serie_btns">
+        <div className="serie_btns serie_btns_position">
+
+            <button type='submit' className="concluirButton cancelarButton" onClick={handleButtonClick3}>
+              Cancelar
+            </button>
+
             <button type='submit' className="concluirButton">
                 <span>Cadastrar</span>
             </button>
+
+            
         </div>
       </form>
     </div>

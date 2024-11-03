@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import { FaDumbbell } from 'react-icons/fa';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../../Navbar";
 
 const Info = () => {
@@ -14,6 +14,7 @@ const Info = () => {
 
   const [isChecked, setIsChecked] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const userData = location.state && location.state.userData;
   const studentInfo = location.state && location.state.studentInfo;
@@ -40,6 +41,10 @@ const Info = () => {
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
+  };
+
+  const handleButtonClick3 = () => {
+    navigate(`/Trainer/Home`);
   };
 
   const handleSubmit = async (event) => {
@@ -149,11 +154,18 @@ const Info = () => {
           </label>
         </div>
 
-        <div className="serie_btns">
+        <div className="serie_btns serie_btns_position">
+
+          <button type='submit' className="concluirButton cancelarButton" onClick={handleButtonClick3}>
+            Cancelar
+          </button>
+
           <button type="submit" className="concluirButton">
             <span>Salvar</span>
           </button>
+
         </div>
+
       </form>
     </div>
     </>
