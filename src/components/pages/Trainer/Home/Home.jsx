@@ -162,10 +162,10 @@ const Home = () => {
             <FaDumbbell className="icon iconTreino" />
             <span>Treinos</span>
           </button>
-          <button className="buttonTreino" onClick={handleConcluirClick2}>
+          {/* <button className="buttonTreino" onClick={handleConcluirClick2}>
             <FaPencilAlt className="icon iconTreino" />
             <span>Solicitar exercício</span>
-          </button>
+          </button> */}
           {/* <button className="buttonTreino" onClick={handleConcluirClick3}>
             <FaEnvelope className="icon iconTreino" />
             <span>Nova postagem</span>
