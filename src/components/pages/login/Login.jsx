@@ -19,8 +19,9 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/Login', {
+        console.log(userData);
+        
+        await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

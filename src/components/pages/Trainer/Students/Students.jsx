@@ -37,9 +37,6 @@ const Preset = () => {
       console.error('Erro na solicitação GET:', error);
       navigate('/');
     });
-
-
-    console.log(userData.refresh_token);
     
     fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/refresh-token', {
         method: 'POST',

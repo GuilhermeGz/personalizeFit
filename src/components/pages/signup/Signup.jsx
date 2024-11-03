@@ -21,7 +21,7 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         try {
             const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register-trainer', {
                 method: 'POST',
@@ -37,6 +37,8 @@ const Signup = () => {
                 if(file){
                     uploadFile(exerciseId, formData);
                 }
+
+                navigate(`/login`);
             } else {
                 console.error('Erro ao cadastrar:', response.statusText);
             }
@@ -160,94 +162,7 @@ const Signup = () => {
     return (
         <div className='main'>
             <InitScreen> 
-
-                {/* <div className='logo'>
-                    <img src={Logo} alt="Imagem de um gostoso na academia" />
-                    <h1>PERSONALIZE FIT</h1>
-                </div>
-                <h3 className='titleSignup'>Criar Conta</h3>
-                
-                <div className="cardContainer">
-
-            <div className="bntAccountContainer" onClick={handleIconClick}>
-                    {renderIconOrImage()}
-                </div>
-            </div>
-
-            <input
-                type="file"
-                id="fileInput"
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-            /> */}
-
-
-
-                {/* <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">
-                        <p>Nome:</p>
-                        <input 
-                            type="text" 
-                            className='dados-cadastro' 
-                            name="username" 
-                            value={formData.username} 
-                            onChange={handleChange} 
-                        />
-                    </label>
-                    <label htmlFor="email">
-                        <p>E-mail:</p>
-                        <input 
-                            type="email" 
-                            className='dados-cadastro' 
-                            name="email" 
-                            value={formData.email} 
-                            onChange={handleChange} 
-                        />
-                    </label>
-                    <label htmlFor="password">
-                        <p>Senha:</p>
-                        <input 
-                            type="password" 
-                            className='dados-cadastro' 
-                            name="password" 
-                            value={formData.password} 
-                            onChange={handleChange} 
-                        />
-                    </label>
-
-                    <p className='titleCadastro'>Tipo de Cadastro</p>
-
-                    <div className='tipo-perfil'>
-                        <label htmlFor="personal">
-                            <input 
-                                type="radio" 
-                                name="userType" 
-                                id="personal" 
-                                value="Personal" 
-                                className='teste' 
-                                onChange={handleChange} 
-                            />
-                            <p>Personal</p>
-                        </label>
-                        <label htmlFor="aluno">
-                            <input 
-                                type="radio" 
-                                name="userType" 
-                                id="aluno" 
-                                value="Aluno" 
-                                className='teste' 
-                                onChange={handleChange} 
-                            />
-                            <p>Aluno</p>
-                        </label>
-                    </div>
-
-                    <div className='btns'>
-                        <button type="submit">Criar Conta</button>
-                    </div>
-                </form> */}
-
-
+            
                 <div className='login-form'>
 
                     <h2>Criar Conta</h2>
@@ -256,11 +171,11 @@ const Signup = () => {
                     <form onSubmit={handleSubmit}>
 
                         <label>
-                            <input
-                                type="email"
+                            <input 
                                 className='input-login'
                                 placeholder='Nome do Usuário'
-                                value={formData.email} 
+                                // value={formData.username} 
+                                name='username'
                                 onChange={handleChange} 
                             />
                         </label>
@@ -270,7 +185,9 @@ const Signup = () => {
                                 type="email"
                                 className='input-login'
                                 placeholder='E-mail'
-                                value={formData.email} 
+                                name='email'
+
+                                // value={formData.email} 
                                 onChange={handleChange} 
                             />
                         </label>
@@ -280,7 +197,8 @@ const Signup = () => {
                                 type="password"
                                 className='input-login'
                                 placeholder='Senha'
-                                value={formData.password}
+                                name='password'
+                                // value={formData.password}
                                 onChange={handleChange} 
                             />
                         </label>
@@ -290,8 +208,8 @@ const Signup = () => {
                                 type="password"
                                 className='input-login'
                                 placeholder='Confirmar Senha'
-                                value={formData.password}
-                                onChange={handleChange} 
+                                // value={formData.password}
+                                // onChange={handleChange} 
                             />
                         </label>
 
@@ -327,9 +245,9 @@ const Signup = () => {
 
 
                         <div className='create-account'>
-                            <Link to="/signup" className='create-account-btn'>
+                            <button type="submit" className='create-account-btn'>
                                 Criar conta
-                            </Link>
+                            </button>
                             <p className='create-account-text login-text'>Já tem uma conta? <Link to="/" className='link-login create-account-text'> Faça login aqui</Link> </p>
                         </div>
 

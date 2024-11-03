@@ -34,7 +34,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
       
-        <Routes>
+      
+
+          <Routes>
             <Route exact path="/login" element={<Login />} />
             
             <Route exact path="/" element={<Login />} />
@@ -42,10 +44,8 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
 
             <Route exact path="/forgot" element={<Forgot />} />
-        </Routes>
 
-          <Routes>
-            
+
             <Route exact path="/Exercise/List" element={<ProtectedRoute element={<ListExercise />} />} />
 
             <Route exact path="/Exercise/Create" element={<ProtectedRoute element={<CreateExercise />} />}/>
