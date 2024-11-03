@@ -30,28 +30,34 @@ const Create = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();     
     
     try {
         const response = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/register-student', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${data.access_token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(formData),
         });
 
         if (response.ok) {
-            const exerciseId = await response.text(); // Obtém a resposta como texto
+          if(!file){
+            console.log("Entrou aqui no antes");
+            
+            navigate("/Trainer/Home");
+            return;
+          }
+            const exerciseId = await response.text();
             const formData = new FormData();
             formData.append('Name', "Teste");
             formData.append('FileData', file);
-               
+          
             const fileResponse = await fetch('http://gaetec-server.tailf2d209.ts.net:8000/file/api/File', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${data.access_token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: formData
             });
@@ -60,6 +66,7 @@ const Create = () => {
                 const fileData = await fileResponse.json();
                 
                 associateFileWithExercise(exerciseId, fileData);
+                navigate("/Trainer/Home");
             } else {
                 console.error('Erro ao enviar o arquivo:', fileResponse.statusText);
             }
@@ -84,7 +91,7 @@ const Create = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${data.access_token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(exerciseFile)
         });

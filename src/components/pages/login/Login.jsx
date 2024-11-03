@@ -19,7 +19,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(userData);
         
         await fetch('http://gaetec-server.tailf2d209.ts.net:8000/user/api/auth/login', {
             method: 'POST',
@@ -61,9 +60,6 @@ const Login = () => {
         });
         
     }
-
-
-
 
   return (
     <div className='main'>
