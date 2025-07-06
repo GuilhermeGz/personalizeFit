@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+body{
+  /* background-color: white; */
+  background: linear-gradient(152deg, #1D1D2A 33.19%, #34607C 106.91%);
+
+}
+
+.template-container{
+  display: flex;
+}
+
+.newPage-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  place-self: center;
+  padding-top: 60px;
+}
+
+.newPage-content .main-column {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px; 
+}

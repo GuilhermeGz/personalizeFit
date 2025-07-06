@@ -1,0 +1,107 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.preset-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+.preset-card:hover {
+  background: #e0e0e0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.add-button,
+.cancel-button,
+.save-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button {
+  background-color: #2196f3;
+  /* background-color: #4caf50; */
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.save-button {
+  /* background-color: #2196f3; */
+  background-color: #4caf50;
+  color: white;
+}
+.preset-card {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #1d3557;
+  border-radius: 4px;
+  padding: 10px 15px;
+  text-align: center;
+  flex: 1 1 calc(45% - 10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* Permite o posicionamento do botão dentro do card */
+}
+
+.delete-button {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: #e74c3c; /* Vermelho claro para indicar exclusão */
+  position: absolute;
+  top: 3px; /* Alinha o botão ao topo do card */
+  right: 10px; /* Alinha o botão à direita do card */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-button:hover {
+  color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+  transform: scale(1.1); /* Leve aumento no botão ao passar o mouse */
+}

@@ -1,0 +1,145 @@
+/* Overlay para escurecer o fundo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.success-message{
+  color: green
+}
+/* Container do modal */
+.modal-container {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Título do modal */
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1d3557;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Ícone ao lado do título */
+.modal-icon {
+  margin-right: 10px;
+}
+
+/* Botão de fechar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #e63946;
+}
+
+/* Estilo dos inputs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #1d3557;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Botões de ação */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.save-button {
+  background: #1d3557;
+  color: #ffffff;
+}
+
+.cancel-button {
+  background: #e63946;
+  color: #ffffff;
+}
+
+/* Estilo do checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  width: 15px !important;
+  height: 15px !important;
+  margin-bottom: 3px;
+}
+
+.image-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.camera-icon {
+  font-size: 50px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.image-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Tamanho fixo do contêiner circular */
+  height: 100px;
+  border: 2px dashed #ccc;
+  border-radius: 50%; /* Para deixar a borda circular */
+  overflow: hidden; /* Garante que a imagem não ultrapasse o limite do contêiner */
+  cursor: pointer;
+}
+
+.profile-preview {
+  width: 100%; /* Ajusta a largura da imagem ao tamanho do contêiner */
+  height: 100%; /* Ajusta a altura da imagem ao tamanho do contêiner */
+  object-fit: cover; /* Corta a imagem para se ajustar ao contêiner circular */
+}
+
+.image-label:hover {
+  border-color: #888; /* Destaque na borda ao passar o mouse */
+}

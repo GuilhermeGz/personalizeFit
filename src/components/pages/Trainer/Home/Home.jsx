@@ -18,10 +18,14 @@ const Home = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
 
-  useEffect(() => {
+  useEffect(() => {    
     
     const decoded = jwtDecode(token);     
     const userSessionId = decoded.sub; 
+    console.log("info aqui");
+    
+    console.log(decoded);
+    
     setUserSessionName(decoded.name || decoded.preferred_username)
 
     const fetchData = async () => {

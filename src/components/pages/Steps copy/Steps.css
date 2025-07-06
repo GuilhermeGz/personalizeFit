@@ -1,0 +1,576 @@
+.App {
+  text-align: center;
+}
+body{
+  /* background-color: white; */
+  background: linear-gradient(152deg, #1D1D2A 33.19%, #34607C 106.91%);
+
+}
+
+.template-container{
+  display: flex;
+}
+
+.newPage-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  place-self: center;
+  padding-top: 60px;
+}
+
+.newPage-content .main-column {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column; 
+  gap: 20px; 
+}
+
+.newTreino-content {
+
+  align-self: center; /* Centraliza verticalmente */
+  justify-self: center; /* Centraliza horizontalmente */
+  position: relative; /* Permite usar 'top' */
+  top: 250px;
+  width: 60%;
+
+
+  background: #1D3557; /* Cor de fundo similar à imagem */
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.opc{
+  text-align: center !important;
+}
+
+.opc2{
+  text-align-last: end;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.entitiesTreino {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+}
+
+.selectTreino {
+  padding: 5px;
+  border-radius: 8px;
+  border: solid;
+  font-size: 14px;
+  background: #1D3557;
+  color: #fff;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search input {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  background: #FFFFFF;
+  color: #1D3557;
+}
+
+.search button {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+.table th {
+  color: #fff;
+}
+
+.table-title{
+  text-transform: uppercase;
+}
+
+.table tr:nth-child(even) {
+  background: #2a4e80;
+}
+
+.edit-button {
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-button:hover {
+  background: #ccc;
+}
+
+
+.edit-button,
+.training-button,
+.toggle-button {
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px; /* Para espaçamento entre os botões */
+}
+
+.edit-button:hover,
+.training-button:hover,
+.toggle-button:hover {
+  background: #ccc;
+}
+
+.toggle-button.active {
+  background-color: green;
+  color: white;
+}
+
+.toggle-button.inactive {
+  background-color: red;
+  color: white;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.pagination-buttonPos {
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 2%;
+
+}
+
+.pagination-buttonPrev {
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 2%;
+}
+
+.pagination{
+  margin-top: 3%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.preset-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+.preset-card:hover {
+  background: #e0e0e0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.add-button,
+.cancel-button,
+.save-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button {
+  background-color: #2196f3;
+  /* background-color: #4caf50; */
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.save-button {
+  /* background-color: #2196f3; */
+  background-color: #4caf50;
+  color: white;
+}
+.preset-card {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #1d3557;
+  border-radius: 4px;
+  padding: 10px 15px;
+  text-align: center;
+  flex: 1 1 calc(45% - 10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* Permite o posicionamento do botão dentro do card */
+}
+
+.delete-button {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  color: #e74c3c; /* Vermelho claro para indicar exclusão */
+  position: absolute;
+  top: 3px; /* Alinha o botão ao topo do card */
+  right: 10px; /* Alinha o botão à direita do card */
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-button:hover {
+  color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+  transform: scale(1.1); /* Leve aumento no botão ao passar o mouse */
+}
+
+/* Já temos as classes para a modal, você pode manter as mesmas ou ajustar conforme necessário */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-input-treino {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 4px;
+  /* border: 1px solid #ddd; */
+  font-size: 14px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 15px;
+}
+
+.search input {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  background: #FFFFFF;
+  color: #1D3557;
+}
+
+
+.create-button-container {
+  justify-content: flex-end; /* Alinha o botão à direita */
+  font-size: 24px;
+    background: transparent;
+    color: white;
+    border: none;
+
+}
+
+.add-button {
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.textsM{
+  color: black;
+}
+
+.details-row {
+  transition: max-height 0.3s ease-in-out; /* Transição apenas da altura */
+  max-height: 0; /* A altura inicial é zero */
+  overflow: hidden; /* Evita que o conteúdo transborde */
+}
+
+.details-row.show {
+  max-height: 1000px; /* Define uma altura máxima para o conteúdo, que pode ser ajustada conforme necessário */
+}
+
+.details-row td {
+  padding: 10px; /* Garante o preenchimento adequado quando a linha está visível */
+}
+
+.details-container {
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  background-color: transparent; /* Cor padrão de fundo */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+
+.step1Text{
+  display: block !important;
+  margin-bottom: 35px;
+
+}
+
+.step1Text input{
+  padding: 10px 100px !important;
+  text-align: -webkit-center;
+}
+
+.step1Bt{
+  width: 100px;
+}
+
+.steap1BtC{
+  background: #E63946 !important;
+  color: white;
+}
+.step3Bt{
+  width: 15%;
+}
+
+.step3Select{
+  margin-bottom: 25px;
+
+  background: #fff;
+  color: #1D3557;
+  border: none;
+  border-radius: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 2%;
+}
+
+.step3BtAdd{
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.step3RepList{
+  margin-bottom: 5px;
+}
+
+.step3RepCont{
+  /* height: 42px; */
+  padding: 10px;
+  color: #2d333a;
+  /* width: 100%; */
+  /* border: 1px solid #c2c8d0; */
+  position: relative;
+  background: #FFF;
+  border-radius: 15px;
+  line-height: 1.1;
+  outline: none;
+  /* font-size: 16px; */
+  transition: all .2s ease-in-out;
+  margin-left: 5px;
+}
+
+.trash{
+  color: red;
+  margin-top: 10px;
+  margin-left: 8px;
+}
+
+.step3NumRep{
+  margin-top: 8px;
+  color: white;
+  
+}
+
+.step3Bts{
+  margin-top: 25px;
+}
+
+.step3Modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1d3557;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 1000;
+  border-radius: 8px;
+  /* width: 400px; */
+  max-width: 90%;
+}
+
+.modalTitle{
+  color: white;
+  margin-bottom: 25px;
+}
+
+.step3TableT{
+  color: white;
+
+}
+
+.cancel-button-step3{
+  background-color: red;
+  color: white;
+
+}
+
+.save-button-step3{
+  background-color: green;
+  color: white;
+}

@@ -1,0 +1,152 @@
+.member-content {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.entities {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.entities select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.search input {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1D3557;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 8px 8px !important;
+  place-content: start !important;
+}
+
+.table th {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table tr {
+  transition: background 0.2s ease;
+}
+
+.table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.edit-button,
+.training-button,
+.toggle-button {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1D3557;
+  border: none;
+  border-radius: 12px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 5px;
+  transition: background 0.2s ease;
+}
+
+.edit-button:hover,
+.training-button:hover,
+.toggle-button:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.toggle-button.active {
+  background-color: #2A9D8F;
+  color: #fff;
+}
+
+.toggle-button.inactive {
+  background-color: #E63946;
+  color: #fff;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination-buttonPrev,
+.pagination-buttonPos {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1D3557;
+  border: none;
+  border-radius: 12px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s ease;
+}
+
+.pagination-buttonPrev:hover,
+.pagination-buttonPos:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+/* Fixar largura das colunas */
+.table th:nth-child(1), 
+.table td:nth-child(1) {
+  min-width: 150px;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table th:nth-child(2), 
+.table td:nth-child(2) {
+  width: 100px;
+  text-align: center;
+}
+
+.table th:nth-child(3), 
+.table td:nth-child(3) {
+  min-width: 180px;
+  text-align: center;
+}
+
+.teste12{
+  border-bottom: 1px solid #aaa !important;
+  border-top: 1px solid #aaa !important;
+}

@@ -44,13 +44,14 @@ const Login = () => {
 
 
             if (decoded.realm_roles.includes("trainer-role")) {
-                navigate('/Trainer/Home', {state: { userData: data}});
+                // navigate('/Trainer/Home', {state: { userData: data}});
+                navigate('/NewPage', {state: { userData: data}});
 
             } else if (decoded.realm_roles.includes("student-role")) {
                 navigate('/Aluno/Home', {state: { userData: data}});
 
             }else{
-               navigate('/Exercise/Create', {state: { userData: data}});
+               navigate('/ExerciseList2', {state: { userData: data}});
 
             }
 

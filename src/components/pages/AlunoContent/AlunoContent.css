@@ -1,0 +1,38 @@
+.aluno-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aluno-content:hover {
+  /* transform: translateY(-6px);  */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4); 
+}
+
+.aluno-content h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.aluno-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.aluno-content li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.coach-icon {
+  width: 25px;
+  height: 25px;
+  background-color: #1D3557;
+  border-radius: 50%;
+  margin-right: 10px;
+}

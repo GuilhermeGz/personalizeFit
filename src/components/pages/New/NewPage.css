@@ -1,0 +1,172 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #E63946;
+  margin-right: 15px;
+}
+
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-info h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.logout-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dashboard-cards {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 1rem;
+  margin: 20px 0;
+}
+
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 5px solid;
+  padding: 15px;
+  border-radius: 12px;
+  flex: 1 1 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-value {
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.dashboard-title {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dashboard-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expiring-section {
+  margin: 20px 0;
+}
+
+.expiring-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.training-title {
+  color: #fff;
+  font-weight: bold;
+}
+
+.student-name {
+  color: rgba(255,255,255,0.7);
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.badge.red { background: #E63946; }
+.badge.orange { background: #F4A261; }
+.badge.green { background: #2A9D8F; }
+
+.empty-text {
+  color: rgba(255,255,255,0.5);
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.chart-container {
+  margin: 20px 0;
+}
+
+/* Ajuste para layout flexível */
+.main-layout {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.left-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ❌ Remove display block da trainerhome */
+.trainerhome {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.newPage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 60px;
+
+  /* ✅ ajuste de largura */
+  width: 90%;
+  max-width: 1400px;
+
+  /* ✅ centraliza com margin */
+  margin: 0 auto;
+}

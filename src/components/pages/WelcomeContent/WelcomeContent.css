@@ -1,0 +1,59 @@
+.welcome-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  min-height: 120px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.welcome-content:hover {
+  /* transform: translateY(-6px);  */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4); 
+}
+
+.text-container {
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.welcome-content h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.welcome-content h2 span {
+  color: #2e1e83;
+  font-weight: bold;
+}
+
+.welcome-content p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.circle {
+  width: 70px;
+  height: 70px;
+  background-color: #2e1e83;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.trainer-avatar {
+  width: 40%;
+  height: 70%;
+  border-radius: 50%;
+  background-color: transparent;
+  object-fit: cover;
+  margin-right: 10px;
+}
